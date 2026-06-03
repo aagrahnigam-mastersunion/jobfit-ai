@@ -1,12 +1,12 @@
 export async function parsePDF(buffer: Buffer): Promise<string> {
-  // pdf-parse v2 uses a class-based API: new PDFParse({ data: buffer }).getText()
+  // Import the inner module directly — avoids Next.js loading pdf-parse's
+  // test-runner code AND avoids the DOMMatrix issue in pdf-parse v2.
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { PDFParse } = require('pdf-parse') as {
-    PDFParse: new (opts: { data: Buffer }) => { getText(): Promise<{ text: string }> }
-  }
-  const parser = new PDFParse({ data: buffer })
-  const result = await parser.getText()
-  return result.text
+  const pdfParse = require('pdf-parse/lib/pdf-parse.js') as (
+    buf: Buffer
+  ) => Promise<{ text: string }>
+  const data = await pdfParse(buffer)
+  return data.text
 }
 
 export async function parseDOCX(buffer: Buffer): Promise<string> {
@@ -15,7 +15,11 @@ export async function parseDOCX(buffer: Buffer): Promise<string> {
   return result.value
 }
 
-export async function parseFile(buffer: Buffer, mimeType: string, filename: string): Promise<string> {
+export async function parseFile(
+  buffer: Buffer,
+  mimeType: string,
+  filename: string
+): Promise<string> {
   const lower = filename.toLowerCase()
   if (lower.endsWith('.pdf') || mimeType === 'application/pdf') {
     return parsePDF(buffer)
