@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Dialog,
@@ -16,9 +17,9 @@ import {
 } from '@/components/ui/dialog'
 import { AnalysisResults } from '@/components/analysis/AnalysisResults'
 import { PreferenceForm } from '@/components/preferences/PreferenceForm'
-import { Loader2, Settings2, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
+import { Loader2, Settings2, AlertCircle, ChevronDown, ChevronUp, RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
-import type { Phase1Result, Gap, Pro, Con, PreferenceAlignment, UserPreferences } from '@/lib/types'
+import type { Phase1Result, Gap, Pro, Con, PreferenceAlignment, UserPreferences, ConfidenceTier } from '@/lib/types'
 
 interface AnalysisState {
   status: 'idle' | 'loading' | 'done' | 'error'
@@ -42,15 +43,30 @@ const initialState: AnalysisState = {
   error: null,
 }
 
+const confidenceColors: Record<string, string> = {
+  HIGH: 'bg-green-600 text-white',
+  MEDIUM: 'bg-amber-500 text-white',
+  LOW: 'bg-red-500 text-white',
+}
+
+interface InitialJd {
+  text: string
+  title: string
+  company: string
+  parentId: string
+  parentConfidence: ConfidenceTier | null
+}
+
 interface Props {
   hasVector: boolean
   initialPreferences: Partial<UserPreferences>
+  initialJd?: InitialJd
 }
 
-export function AnalysePage({ hasVector, initialPreferences }: Props) {
-  const [jdText, setJdText] = useState('')
-  const [jdTitle, setJdTitle] = useState('')
-  const [jdCompany, setJdCompany] = useState('')
+export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props) {
+  const [jdText, setJdText] = useState(initialJd?.text ?? '')
+  const [jdTitle, setJdTitle] = useState(initialJd?.title ?? '')
+  const [jdCompany, setJdCompany] = useState(initialJd?.company ?? '')
   const [preferences, setPreferences] = useState<Partial<UserPreferences>>(initialPreferences)
   const [analysisState, setAnalysisState] = useState<AnalysisState>(initialState)
   const [showPreferences, setShowPreferences] = useState(false)
@@ -76,6 +92,7 @@ export function AnalysePage({ hasVector, initialPreferences }: Props) {
           jdText,
           jdTitle: jdTitle || undefined,
           jdCompany: jdCompany || undefined,
+          parentAnalysisId: initialJd?.parentId,
           preferences: {
             roleTypes: preferences.roleTypes ?? [],
             seniority: preferences.seniority ?? '',
@@ -166,6 +183,40 @@ export function AnalysePage({ hasVector, initialPreferences }: Props) {
         </p>
       </div>
 
+      {/* Re-analyse banner */}
+      {initialJd && (
+        <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/60 dark:bg-violet-950/20 p-4 flex items-start gap-3 mb-6">
+          <RefreshCw className="h-5 w-5 text-violet-500 shrink-0 mt-0.5" />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-violet-800 dark:text-violet-200">
+              Re-analysing with your current CV
+            </p>
+            <p className="text-xs text-violet-600 dark:text-violet-400 mt-0.5 flex items-center gap-2 flex-wrap">
+              <span>
+                Pre-filled from:{' '}
+                <span className="font-medium">
+                  {initialJd.title || 'Untitled'}
+                  {initialJd.company && ` at ${initialJd.company}`}
+                </span>
+              </span>
+              {initialJd.parentConfidence && (
+                <span className="flex items-center gap-1">
+                  · Original score:
+                  <Badge className={`text-xs ${confidenceColors[initialJd.parentConfidence]}`}>
+                    {initialJd.parentConfidence}
+                  </Badge>
+                </span>
+              )}
+            </p>
+          </div>
+          <Link href={`/analyse/${initialJd.parentId}`} className="shrink-0">
+            <Button variant="outline" size="sm" className="text-xs h-7 border-violet-300 dark:border-violet-700">
+              View original
+            </Button>
+          </Link>
+        </div>
+      )}
+
       {!hasVector && (
         <div className="rounded-xl border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/20 p-4 flex items-start gap-3 mb-6">
           <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
@@ -225,6 +276,8 @@ export function AnalysePage({ hasVector, initialPreferences }: Props) {
                 >
                   {analysisState.status === 'loading' ? (
                     <><Loader2 className="h-4 w-4 animate-spin" />Analysing...</>
+                  ) : initialJd ? (
+                    <><RefreshCw className="h-4 w-4" />Re-analyse Fit</>
                   ) : (
                     'Analyse Fit'
                   )}

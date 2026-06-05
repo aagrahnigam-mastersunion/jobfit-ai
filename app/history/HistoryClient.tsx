@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Clock, Zap, ArrowRight, Building2 } from 'lucide-react'
+import { Clock, Zap, ArrowRight, Building2, RefreshCw } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 
 interface Analysis {
@@ -16,6 +16,7 @@ interface Analysis {
   summary: string | null
   created_at: string
   latency_phase1_ms: number | null
+  parent_analysis_id: string | null
 }
 
 const confidenceColors: Record<string, string> = {
@@ -62,50 +63,69 @@ export function HistoryClient({ analyses }: { analyses: Analysis[] }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
             >
-              <Link href={`/analyse/${analysis.id}`}>
-                <Card className="hover:bg-muted/40 transition-colors cursor-pointer">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="font-medium text-sm">
-                            {analysis.jd_title ?? 'Untitled Position'}
-                          </h3>
-                          {analysis.confidence && (
-                            <Badge className={`text-xs ${confidenceColors[analysis.confidence] ?? ''}`}>
-                              {analysis.confidence}
-                            </Badge>
+              <Card className="hover:bg-muted/40 transition-colors group">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    {/* Main content — links to detail */}
+                    <Link href={`/analyse/${analysis.id}`} className="min-w-0 flex-1 block">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h3 className="font-medium text-sm">
+                              {analysis.jd_title ?? 'Untitled Position'}
+                            </h3>
+                            {analysis.confidence && (
+                              <Badge className={`text-xs ${confidenceColors[analysis.confidence] ?? ''}`}>
+                                {analysis.confidence}
+                              </Badge>
+                            )}
+                            {analysis.parent_analysis_id && (
+                              <Badge variant="outline" className="text-xs border-violet-300 text-violet-600 dark:text-violet-400">
+                                Re-run
+                              </Badge>
+                            )}
+                          </div>
+
+                          {analysis.jd_company && (
+                            <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
+                              <Building2 className="h-3 w-3 shrink-0" />
+                              {analysis.jd_company}
+                            </p>
                           )}
+
+                          {analysis.summary && (
+                            <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
+                              {analysis.summary}
+                            </p>
+                          )}
+
+                          <p className="text-xs text-muted-foreground mt-1.5 flex items-center gap-1">
+                            <Clock className="h-3 w-3 shrink-0" />
+                            {formatDistanceToNow(new Date(analysis.created_at), { addSuffix: true })}
+                            {analysis.latency_phase1_ms && (
+                              <span className="ml-2 text-muted-foreground/60">
+                                · scored in {(analysis.latency_phase1_ms / 1000).toFixed(1)}s
+                              </span>
+                            )}
+                          </p>
                         </div>
-
-                        {analysis.jd_company && (
-                          <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
-                            <Building2 className="h-3 w-3 shrink-0" />
-                            {analysis.jd_company}
-                          </p>
-                        )}
-
-                        {analysis.summary && (
-                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
-                            {analysis.summary}
-                          </p>
-                        )}
-
-                        <p className="text-xs text-muted-foreground mt-1.5 flex items-center gap-1">
-                          <Clock className="h-3 w-3 shrink-0" />
-                          {formatDistanceToNow(new Date(analysis.created_at), { addSuffix: true })}
-                          {analysis.latency_phase1_ms && (
-                            <span className="ml-2 text-muted-foreground/60">
-                              · scored in {(analysis.latency_phase1_ms / 1000).toFixed(1)}s
-                            </span>
-                          )}
-                        </p>
+                        <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
                       </div>
-                      <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                    </Link>
+
+                    {/* Re-analyse action — appears on hover */}
+                    <Link
+                      href={`/analyse?from=${analysis.id}`}
+                      className="shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Button variant="outline" size="sm" className="h-7 gap-1.5 text-xs">
+                        <RefreshCw className="h-3 w-3" />
+                        Re-analyse
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </div>

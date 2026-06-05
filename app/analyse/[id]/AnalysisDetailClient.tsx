@@ -9,10 +9,11 @@ import { Badge } from '@/components/ui/badge'
 import { ConfidenceCard } from '@/components/analysis/ConfidenceCard'
 import { GapCard } from '@/components/analysis/GapCard'
 import { ProsConsPanel } from '@/components/analysis/ProsConsPanel'
-import { ArrowLeft, Trash2, Clock } from 'lucide-react'
+import { ArrowLeft, Trash2, Clock, RefreshCw, ArrowRight } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatDistanceToNow } from 'date-fns'
-import type { Analysis, Phase1Result } from '@/lib/types'
+import type { Analysis, Phase1Result, ConfidenceTier } from '@/lib/types'
+import type { ParentSummary } from './page'
 
 const confidenceColors: Record<string, string> = {
   HIGH: 'bg-green-600 text-white',
@@ -20,7 +21,12 @@ const confidenceColors: Record<string, string> = {
   LOW: 'bg-red-500 text-white',
 }
 
-export function AnalysisDetailClient({ analysis }: { analysis: Analysis }) {
+interface Props {
+  analysis: Analysis
+  parentAnalysis: ParentSummary | null
+}
+
+export function AnalysisDetailClient({ analysis, parentAnalysis }: Props) {
   const router = useRouter()
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -48,6 +54,11 @@ export function AnalysisDetailClient({ analysis }: { analysis: Analysis }) {
         latency: analysis.latency_phase1_ms ?? undefined,
       }
     : null
+
+  const confidenceChanged =
+    parentAnalysis?.confidence &&
+    analysis.confidence &&
+    parentAnalysis.confidence !== analysis.confidence
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -77,19 +88,78 @@ export function AnalysisDetailClient({ analysis }: { analysis: Analysis }) {
                 </Badge>
               </>
             )}
+            {analysis.parent_analysis_id && (
+              <>
+                <span>·</span>
+                <Badge variant="outline" className="text-xs border-violet-300 text-violet-600 dark:text-violet-400">
+                  Re-run
+                </Badge>
+              </>
+            )}
           </p>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          className="text-red-500 hover:text-red-600 gap-1.5"
-          onClick={handleDelete}
-          disabled={isDeleting}
-        >
-          <Trash2 className="h-4 w-4" />
-          Delete
-        </Button>
+        <div className="flex gap-2">
+          <Link href={`/analyse?from=${analysis.id}`}>
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <RefreshCw className="h-4 w-4" />
+              Re-analyse
+            </Button>
+          </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-red-500 hover:text-red-600 gap-1.5"
+            onClick={handleDelete}
+            disabled={isDeleting}
+          >
+            <Trash2 className="h-4 w-4" />
+            Delete
+          </Button>
+        </div>
       </div>
+
+      {/* Re-run comparison banner */}
+      {parentAnalysis && (
+        <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}>
+          <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/60 dark:bg-violet-950/20 p-4 flex items-center gap-3 flex-wrap">
+            <RefreshCw className="h-4 w-4 text-violet-500 shrink-0" />
+            <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap text-sm">
+              <span className="text-violet-700 dark:text-violet-300">Re-run of</span>
+              <Link
+                href={`/analyse/${parentAnalysis.id}`}
+                className="font-medium text-violet-800 dark:text-violet-200 hover:underline"
+              >
+                {parentAnalysis.jd_title ?? 'original analysis'}
+              </Link>
+              {parentAnalysis.confidence && analysis.confidence && (
+                <span className="flex items-center gap-1.5 text-sm">
+                  <span className="text-muted-foreground">·</span>
+                  <Badge className={`text-xs ${confidenceColors[parentAnalysis.confidence]}`}>
+                    {parentAnalysis.confidence}
+                  </Badge>
+                  <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                  <Badge className={`text-xs ${confidenceColors[analysis.confidence]}`}>
+                    {analysis.confidence}
+                  </Badge>
+                  {confidenceChanged && (
+                    <span className="text-xs text-muted-foreground">
+                      {(['HIGH', 'MEDIUM', 'LOW'] as ConfidenceTier[]).indexOf(analysis.confidence) <
+                      (['HIGH', 'MEDIUM', 'LOW'] as ConfidenceTier[]).indexOf(parentAnalysis.confidence as ConfidenceTier)
+                        ? '· improved'
+                        : '· regressed'}
+                    </span>
+                  )}
+                </span>
+              )}
+            </div>
+            <Link href={`/analyse/${parentAnalysis.id}`} className="shrink-0">
+              <Button variant="outline" size="sm" className="text-xs h-7 border-violet-300 dark:border-violet-700">
+                View original
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      )}
 
       {/* Confidence card */}
       {phase1 && (

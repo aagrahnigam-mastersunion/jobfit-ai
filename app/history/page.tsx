@@ -11,7 +11,7 @@ export default async function HistoryPage() {
   const supabase = createAdminClient()
   const { data } = await supabase
     .from('analyses')
-    .select('id, jd_title, jd_company, confidence, summary, created_at, latency_phase1_ms')
+    .select('id, jd_title, jd_company, confidence, summary, created_at, latency_phase1_ms, parent_analysis_id')
     .eq('user_id', session.user.id)
     .order('created_at', { ascending: false })
     .limit(20)

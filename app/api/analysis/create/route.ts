@@ -11,6 +11,7 @@ const bodySchema = z.object({
   jdText: z.string().min(50, 'Job description must be at least 50 characters'),
   jdTitle: z.string().optional(),
   jdCompany: z.string().optional(),
+  parentAnalysisId: z.string().uuid().optional(),
   preferences: z.object({
     roleTypes: z.array(z.string()).default([]),
     seniority: z.string().default(''),
@@ -56,7 +57,7 @@ export async function POST(req: NextRequest) {
           return
         }
 
-        const { jdText, jdTitle, jdCompany, preferences } = parsed.data
+        const { jdText, jdTitle, jdCompany, parentAnalysisId, preferences } = parsed.data
 
         const supabase = createAdminClient()
 
@@ -130,6 +131,7 @@ export async function POST(req: NextRequest) {
             preferences_snapshot: userPrefs,
             latency_phase1_ms: latencyMs,
             latency_phase2_ms: null,
+            parent_analysis_id: parentAnalysisId ?? null,
           })
           .select()
           .single()

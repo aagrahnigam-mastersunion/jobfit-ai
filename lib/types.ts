@@ -125,6 +125,7 @@ export interface Analysis {
   preferences_snapshot: UserPreferences | null
   latency_phase1_ms: number | null
   latency_phase2_ms: number | null
+  parent_analysis_id: string | null
   created_at: string
 }
 
