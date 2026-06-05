@@ -2,10 +2,10 @@ import { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/server'
-import { callGemini } from '@/lib/gemini'
-import { buildConfidencePrompt, buildFullReportPrompt } from '@/lib/prompts'
+import { callLLM } from '@/lib/gemini'
+import { buildAnalysisPrompt } from '@/lib/prompts'
 import { checkRateLimit } from '@/lib/rate-limit'
-import type { Phase1Result, Phase2Result, SkillVector, UserPreferences } from '@/lib/types'
+import type { CombinedAnalysisResult, SkillVector, UserPreferences } from '@/lib/types'
 
 const bodySchema = z.object({
   jdText: z.string().min(50, 'Job description must be at least 50 characters'),
@@ -77,22 +77,25 @@ export async function POST(req: NextRequest) {
         const vector = vectorRow.vector_data as SkillVector
         const userPrefs = preferences as UserPreferences
 
-        // Phase 1 — confidence scoring
+        // Single LLM call — replaces two sequential calls
         const t1 = Date.now()
-        const phase1 = (await callGemini(buildConfidencePrompt(vector, jdText, userPrefs))) as Phase1Result
-        const latencyPhase1 = Date.now() - t1
-        send('confidence', { ...phase1, latency: latencyPhase1 })
+        const result = (await callLLM(buildAnalysisPrompt(vector, jdText, userPrefs))) as CombinedAnalysisResult
+        const latencyMs = Date.now() - t1
 
-        // Phase 2 — full report
-        const t2 = Date.now()
-        const phase2 = (await callGemini(buildFullReportPrompt(vector, jdText, userPrefs, phase1))) as Phase2Result
-        const latencyPhase2 = Date.now() - t2
+        send('confidence', {
+          confidence: result.confidence,
+          summary: result.summary,
+          top_strength: result.top_strength,
+          top_concern: result.top_concern,
+          confidence_factors: result.confidence_factors,
+          latency: latencyMs,
+        })
 
-        send('gaps', { gaps: phase2.gaps })
+        send('gaps', { gaps: result.gaps })
         send('pros_cons', {
-          pros: phase2.pros,
-          cons: phase2.cons,
-          preference_alignment: phase2.preference_alignment,
+          pros: result.pros,
+          cons: result.cons,
+          preference_alignment: result.preference_alignment,
         })
 
         // Ensure profile exists
@@ -118,15 +121,15 @@ export async function POST(req: NextRequest) {
             jd_title: jdTitle ?? null,
             jd_company: jdCompany ?? null,
             jd_raw: jdText,
-            confidence: phase1.confidence,
-            summary: phase1.summary,
-            gaps: phase2.gaps,
-            pros: phase2.pros,
-            cons: phase2.cons,
-            recommendations: phase2.gaps.flatMap((g) => g.recommendations),
+            confidence: result.confidence,
+            summary: result.summary,
+            gaps: result.gaps,
+            pros: result.pros,
+            cons: result.cons,
+            recommendations: result.gaps.flatMap((g) => g.recommendations),
             preferences_snapshot: userPrefs,
-            latency_phase1_ms: latencyPhase1,
-            latency_phase2_ms: latencyPhase2,
+            latency_phase1_ms: latencyMs,
+            latency_phase2_ms: null,
           })
           .select()
           .single()

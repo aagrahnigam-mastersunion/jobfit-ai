@@ -88,6 +88,18 @@ export interface Phase2Result {
   preference_alignment: PreferenceAlignment
 }
 
+export interface CombinedAnalysisResult {
+  confidence: ConfidenceTier
+  summary: string
+  top_strength: string
+  top_concern: string
+  confidence_factors: string[]
+  gaps: Gap[]
+  pros: Pro[]
+  cons: Con[]
+  preference_alignment: PreferenceAlignment
+}
+
 export interface UserPreferences {
   roleTypes: string[]
   seniority: string

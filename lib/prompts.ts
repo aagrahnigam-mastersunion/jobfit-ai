@@ -97,3 +97,52 @@ ${JSON.stringify(preferences, null, 2)}
 PHASE 1 RESULT:
 ${JSON.stringify(phase1, null, 2)}`
 }
+
+export function buildAnalysisPrompt(
+  vector: SkillVector,
+  jdText: string,
+  preferences: UserPreferences
+): string {
+  return `You are a senior career analyst. Given a candidate's skill vector and a job description, produce a complete job-fit analysis in a single JSON response.
+Rules:
+- Output ONLY valid JSON. No markdown, no preamble.
+- Confidence tiers: LOW (poor fit, major gaps), MEDIUM (partial fit, some gaps), HIGH (strong fit, minor or no gaps).
+- Every gap MUST have jd_evidence: a quoted phrase directly from the JD.
+- Failure modes: ATS_KEYWORD, EXPERIENCE_FRAMING, SENIORITY_MISMATCH, LOCATION, COMPETITION, EDUCATION, CERTIFICATION.
+- Pros and Cons MUST be weighted by user preferences.
+- Recommendations must be specific and actionable — never say "improve your skills".
+- Never claim skills or experience not in the skill vector.
+- Include 3-7 gaps, 3-6 pros, 3-6 cons, exactly 3 recommendations per gap.
+- If uncertain between two confidence tiers, default to the lower one.
+
+Schema:
+{
+  "confidence": "LOW" | "MEDIUM" | "HIGH",
+  "summary": "string (1-2 sentences explaining the confidence rating)",
+  "top_strength": "string (the single strongest match point)",
+  "top_concern": "string (the single biggest gap or risk)",
+  "confidence_factors": ["string", "string", "string"],
+  "gaps": [{
+    "gap": "string",
+    "failure_mode": "ATS_KEYWORD|EXPERIENCE_FRAMING|SENIORITY_MISMATCH|LOCATION|COMPETITION|EDUCATION|CERTIFICATION",
+    "severity": "CRITICAL|MODERATE|NICE_TO_HAVE",
+    "jd_evidence": "string (quoted from JD)",
+    "recommendations": ["string", "string", "string"]
+  }],
+  "pros": [{ "point": "string", "source": "CV|PREFERENCE", "weight": "HIGH|MEDIUM|LOW" }],
+  "cons": [{ "point": "string", "source": "JD|PREFERENCE", "weight": "HIGH|MEDIUM|LOW" }],
+  "preference_alignment": {
+    "aligned": ["string"],
+    "misaligned": ["string"]
+  }
+}
+
+SKILL VECTOR:
+${JSON.stringify(vector, null, 2)}
+
+JOB DESCRIPTION:
+${jdText}
+
+USER PREFERENCES:
+${JSON.stringify(preferences, null, 2)}`
+}
