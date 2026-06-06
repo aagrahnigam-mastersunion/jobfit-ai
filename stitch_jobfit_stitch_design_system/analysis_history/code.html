@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFit AI - Analysis History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;700&amp;family=Roboto+Flex:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#006157",
+                        "outline-variant": "#CAC4D0",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary-container": "#E3E5F5",
+                        "surface-variant": "#E7E0EC",
+                        "surface-container-low": "#f6f2f5",
+                        "medium-confidence": "#E65100",
+                        "primary-container": "#3d5afe",
+                        "outline": "#79747E",
+                        "tertiary-fixed-dim": "#70d8c8",
+                        "on-secondary-container": "#27378a",
+                        "inverse-primary": "#bbc3ff",
+                        "on-primary-container": "#f1f0ff",
+                        "on-tertiary-fixed-variant": "#005048",
+                        "high-confidence-container": "#E8F5E9",
+                        "surface-bright": "#fcf8fb",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#bbfff2",
+                        "low-confidence-container": "#FFEBEE",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#00201c",
+                        "on-background": "#1c1b1d",
+                        "primary": "#183ce6",
+                        "surface-container": "#f0edf0",
+                        "primary-fixed-dim": "#bbc3ff",
+                        "medium-confidence-container": "#FFF3E0",
+                        "error": "#ba1a1a",
+                        "elevated-surface-1": "#F7F2FA",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#2848ee",
+                        "tertiary-container": "#007c6f",
+                        "surface-container-high": "#ebe7ea",
+                        "on-surface": "#1c1b1d",
+                        "success-container": "#D4F0EC",
+                        "on-secondary-fixed": "#00105b",
+                        "surface-container-highest": "#e5e1e4",
+                        "surface-dim": "#dcd9dc",
+                        "secondary-fixed": "#dee0ff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dee0ff",
+                        "inverse-surface": "#313032",
+                        "high-confidence": "#2E7D32",
+                        "background": "#fcf8fb",
+                        "low-confidence": "#C62828",
+                        "on-surface-variant": "#444656",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#002ccd",
+                        "tertiary-fixed": "#8df5e4",
+                        "surface": "#fcf8fb",
+                        "inverse-on-surface": "#f3f0f3",
+                        "secondary": "#4858ab",
+                        "on-secondary-fixed-variant": "#2f3f92",
+                        "on-primary-fixed": "#000f5d",
+                        "elevated-surface-2": "#F3EDF7",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "xl": "24px",
+                        "4xl": "64px",
+                        "2xl": "32px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "auto",
+                        "gutter-mobile": "16px",
+                        "gutter-desktop": "24px",
+                        "lg": "16px",
+                        "3xl": "48px",
+                        "md": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Roboto Flex"],
+                        "label-md": ["Roboto Flex"],
+                        "headline-lg-mobile": ["Source Sans 3"],
+                        "body-lg": ["Roboto Flex"],
+                        "display-lg": ["Source Sans 3"],
+                        "headline-md": ["Source Sans 3"],
+                        "title-md": ["Source Sans 3"],
+                        "title-lg": ["Source Sans 3"],
+                        "headline-lg": ["Source Sans 3"],
+                        "label-lg": ["Roboto Flex"],
+                        "body-sm": ["Roboto Flex"],
+                        "body-md": ["Roboto Flex"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                        "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "0px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                        "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.4px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-background">
+<div class="flex justify-between items-center px-lg h-16 w-full max-w-[1200px] mx-auto">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="auto_awesome">auto_awesome</span>
+<h1 class="font-title-lg text-title-lg font-bold text-primary dark:text-primary-fixed">JobFit AI</h1>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile pb-24 pt-sm">
+<section class="mb-xl">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Analysis History</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">12 analyses · sorted by most recent</p>
+</section>
+<!-- Search + Filter Section -->
+<section class="space-y-lg mb-xl">
+<!-- Outlined Search Field -->
+<div class="relative flex items-center h-[48px] w-full border border-outline rounded-full px-lg focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-surface-container-lowest">
+<span class="material-symbols-outlined text-on-surface-variant mr-md" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant" placeholder="Search by role or company..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-sm overflow-x-auto no-scrollbar py-base">
+<button class="h-8 px-lg rounded-full flex items-center justify-center bg-secondary-container text-on-secondary-container font-label-lg text-label-lg transition-transform active:scale-95">
+                    All
+                </button>
+<button class="h-8 px-lg rounded-full flex items-center justify-center border border-outline text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant/20 transition-transform active:scale-95">
+                    HIGH
+                </button>
+<button class="h-8 px-lg rounded-full flex items-center justify-center border border-outline text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant/20 transition-transform active:scale-95">
+                    MEDIUM
+                </button>
+<button class="h-8 px-lg rounded-full flex items-center justify-center border border-outline text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-variant/20 transition-transform active:scale-95">
+                    LOW
+                </button>
+</div>
+</section>
+<!-- Vertical List of Cards -->
+<div class="space-y-lg">
+<!-- Card 1 -->
+<div class="flex items-center p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm relative overflow-hidden transition-all active:scale-[0.98] hover:shadow-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-high-confidence"></div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-title-md shrink-0 mr-lg">R</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface">Product Manager</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Razorpay</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Analysed 2 days ago · 4 gaps</p>
+</div>
+<div class="shrink-0 ml-md">
+<span class="bg-high-confidence-container text-high-confidence font-label-md text-label-md px-lg py-1 rounded-full border border-high-confidence/10">HIGH</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex items-center p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm relative overflow-hidden transition-all active:scale-[0.98] hover:shadow-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-high-confidence"></div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-title-md shrink-0 mr-lg">C</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface">Growth Lead</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">CRED</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Analysed 3 days ago · 2 gaps</p>
+</div>
+<div class="shrink-0 ml-md">
+<span class="bg-high-confidence-container text-high-confidence font-label-md text-label-md px-lg py-1 rounded-full border border-high-confidence/10">HIGH</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex items-center p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm relative overflow-hidden transition-all active:scale-[0.98] hover:shadow-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-medium-confidence"></div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-title-md shrink-0 mr-lg">F</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface">Software Engineer</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Flipkart</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Analysed 5 days ago · 7 gaps</p>
+</div>
+<div class="shrink-0 ml-md">
+<span class="bg-medium-confidence-container text-medium-confidence font-label-md text-label-md px-lg py-1 rounded-full border border-medium-confidence/10">MEDIUM</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="flex items-center p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm relative overflow-hidden transition-all active:scale-[0.98] hover:shadow-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-medium-confidence"></div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-title-md shrink-0 mr-lg">S</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface">Strategy Manager</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Swiggy</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Analysed 1 week ago · 5 gaps</p>
+</div>
+<div class="shrink-0 ml-md">
+<span class="bg-medium-confidence-container text-medium-confidence font-label-md text-label-md px-lg py-1 rounded-full border border-medium-confidence/10">MEDIUM</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="flex items-center p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm relative overflow-hidden transition-all active:scale-[0.98] hover:shadow-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-low-confidence"></div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-title-md shrink-0 mr-lg">M</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface">Product Analyst</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Meesho</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Analysed 10 days ago · 12 gaps</p>
+</div>
+<div class="shrink-0 ml-md">
+<span class="bg-low-confidence-container text-low-confidence font-label-md text-label-md px-lg py-1 rounded-full border border-low-confidence/10">LOW</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (AI Action Anchor) -->
+<!-- Suppressed on History screen as per guidance unless perfectly aligned -->
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-md py-sm bg-surface-container shadow-sm rounded-t-xl md:hidden">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Analyse -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Analyse</span>
+</a>
+<!-- History (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="history" data-weight="fill" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 transition-transform active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for chips
+        const chips = document.querySelectorAll('.flex.gap-sm button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                    c.classList.add('border', 'border-outline', 'text-on-surface-variant');
+                });
+                chip.classList.add('bg-secondary-container', 'text-on-secondary-container');
+                chip.classList.remove('border', 'border-outline', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

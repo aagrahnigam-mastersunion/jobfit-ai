@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Match Analysis - JobFit AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dcd9dc",
+                    "secondary-fixed-dim": "#bac3ff",
+                    "tertiary-fixed-dim": "#70d8c8",
+                    "tertiary-container": "#007c6f",
+                    "elevated-surface-2": "#F3EDF7",
+                    "medium-confidence-container": "#FFF3E0",
+                    "primary-container": "#E8EAFF",
+                    "surface-variant": "#E7E0EC",
+                    "tertiary": "#006157",
+                    "outline": "#79747E",
+                    "secondary-fixed": "#dee0ff",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#2848ee",
+                    "tertiary-fixed": "#8df5e4",
+                    "on-tertiary-fixed": "#00201c",
+                    "outline-variant": "#c5c5d9",
+                    "surface": "#fcf8fb",
+                    "elevated-surface-1": "#F7F2FA",
+                    "primary": "#183ce6",
+                    "on-secondary-fixed": "#00105b",
+                    "secondary-container": "#96a5ff",
+                    "on-surface-variant": "#444656",
+                    "on-secondary-fixed-variant": "#2f3f92",
+                    "on-primary-fixed-variant": "#002ccd",
+                    "on-surface": "#1c1b1d",
+                    "high-confidence-container": "#E8F5E9",
+                    "primary-fixed": "#dee0ff",
+                    "on-background": "#1c1b1d",
+                    "low-confidence-container": "#FFEBEE",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f3f0f3",
+                    "error": "#ba1a1a",
+                    "background": "#fcf8fb",
+                    "high-confidence": "#2E7D32",
+                    "on-primary-container": "#001289",
+                    "inverse-primary": "#bbc3ff",
+                    "primary-fixed-dim": "#bbc3ff",
+                    "on-tertiary-fixed-variant": "#005048",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e5e1e4",
+                    "secondary": "#4858ab",
+                    "surface-container-high": "#ebe7ea",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "medium-confidence": "#E65100",
+                    "low-confidence": "#C62828",
+                    "success-container": "#D4F0EC",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#bbfff2",
+                    "surface-container": "#f0edf0",
+                    "surface-bright": "#fcf8fb",
+                    "inverse-surface": "#313032",
+                    "on-primary-fixed": "#000f5d",
+                    "surface-container-low": "#f6f2f5",
+                    "on-secondary-container": "#27378a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "16px",
+                    "gutter-mobile": "16px",
+                    "3xl": "48px",
+                    "2xl": "32px",
+                    "xl": "24px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "margin-desktop": "auto",
+                    "base": "4px",
+                    "gutter-desktop": "24px",
+                    "md": "12px",
+                    "4xl": "64px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "label-lg": ["Roboto Flex"],
+                    "body-md": ["Roboto Flex"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-sm": ["Roboto Flex"],
+                    "headline-lg-mobile": ["Source Sans 3"],
+                    "body-sm": ["Roboto Flex"],
+                    "title-md": ["Source Sans 3"],
+                    "headline-md": ["Source Sans 3"],
+                    "title-lg": ["Source Sans 3"],
+                    "display-lg": ["Source Sans 3"],
+                    "label-md": ["Roboto Flex"],
+                    "headline-lg": ["Source Sans 3"]
+            },
+            "fontSize": {
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.4px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "0px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #fcf8fb;
+            color: #1c1b1d;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-background transition-colors duration-200">
+<div class="flex justify-between items-center px-lg h-16 w-full">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="p-2 rounded-full hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-title-lg text-title-lg font-bold text-primary">Match Analysis</h1>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface">share</span>
+</button>
+</div>
+</header>
+<main class="px-margin-mobile pt-lg flex flex-col gap-xl">
+<!-- Confidence Card -->
+<section class="rounded-xl bg-high-confidence-container border-l-4 border-high-confidence p-lg shadow-sm transition-transform active:scale-[0.98]">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label-md text-label-md text-high-confidence uppercase tracking-wider">Match Confidence</span>
+<span class="bg-high-confidence text-white font-label-lg text-label-lg px-4 py-1 rounded-full">HIGH</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface mb-lg">Your profile shows a 92% alignment with the Senior Product Designer role requirements.</p>
+<div class="flex flex-col gap-md">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-high-confidence text-[20px] mt-0.5">check_circle</span>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Top Strength</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Exceptional visual design portfolio and 5+ years of B2B experience.</p>
+</div>
+</div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-medium-confidence text-[20px] mt-0.5">info</span>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Top Concern</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Limited exposure to specialized financial auditing tools.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Gap Analysis Section -->
+<section>
+<div class="flex items-baseline justify-between mb-md">
+<h2 class="font-title-lg text-title-lg text-on-surface">Gap Analysis</h2>
+<span class="font-label-md text-label-md text-on-surface-variant">3 gaps identified</span>
+</div>
+<div class="flex flex-col gap-lg">
+<!-- Card 1 (CRITICAL) -->
+<article class="rounded-xl bg-low-confidence-container p-lg border border-error/10 flex flex-col gap-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-low-confidence">priority_high</span>
+<h3 class="font-title-md text-title-md text-low-confidence">Missing SQL Proficiency</h3>
+</div>
+<blockquote class="border-l-2 border-low-confidence/30 pl-md py-1 italic font-body-md text-body-md text-on-surface-variant">
+                        "The candidate must be able to write complex SQL queries for data-driven product decisions."
+                    </blockquote>
+<ul class="flex flex-col gap-xs list-disc list-inside font-body-md text-body-md text-on-surface">
+<li>Complete a SQL fundamentals course</li>
+<li>Update resume to include data analysis projects</li>
+</ul>
+</article>
+<!-- Card 2 (MODERATE) -->
+<article class="rounded-xl bg-medium-confidence-container p-lg border border-medium-confidence/10 flex flex-col gap-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-medium-confidence">warning</span>
+<h3 class="font-title-md text-title-md text-medium-confidence">User Research Leadership</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">While you have research experience, the role requires leading a team of 4 researchers.</p>
+<div class="flex gap-sm">
+<span class="px-3 py-1 bg-surface-container-highest rounded-full font-label-sm text-label-sm text-on-surface-variant">Moderate Impact</span>
+</div>
+</article>
+<!-- Card 3 (NICE_TO_HAVE) -->
+<article class="rounded-xl bg-surface-container p-lg border border-outline-variant flex flex-col gap-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">lightbulb</span>
+<h3 class="font-title-md text-title-md text-on-surface">Motion Design Skills</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-opacity-80">Nice-to-have skill for high-fidelity prototyping phases.</p>
+</article>
+</div>
+</section>
+<!-- Pros & Cons Section -->
+<section class="flex flex-col gap-lg">
+<h2 class="font-title-lg text-title-lg text-on-surface">Detailed Alignment</h2>
+<div class="grid grid-cols-1 gap-lg">
+<!-- Pros -->
+<div class="flex flex-col gap-md">
+<div class="flex items-center gap-sm text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<h4 class="font-label-lg text-label-lg uppercase tracking-widest">Pros</h4>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="p-md rounded-lg border border-tertiary/20 bg-success-container/10 flex gap-md items-start">
+<span class="material-symbols-outlined text-tertiary text-sm mt-1">add</span>
+<p class="font-body-md text-body-md text-on-surface">Deep expertise in Figma-to-Code workflows</p>
+</div>
+<div class="p-md rounded-lg border border-tertiary/20 bg-success-container/10 flex gap-md items-start">
+<span class="material-symbols-outlined text-tertiary text-sm mt-1">add</span>
+<p class="font-body-md text-body-md text-on-surface">Strong cultural fit with agile environments</p>
+</div>
+</div>
+</div>
+<!-- Cons -->
+<div class="flex flex-col gap-md">
+<div class="flex items-center gap-sm text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">thumb_down</span>
+<h4 class="font-label-lg text-label-lg uppercase tracking-widest">Cons</h4>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="p-md rounded-lg border border-error/20 bg-error-container/10 flex gap-md items-start">
+<span class="material-symbols-outlined text-error text-sm mt-1">remove</span>
+<p class="font-body-md text-body-md text-on-surface">No prior experience in the EdTech sector</p>
+</div>
+<div class="p-md rounded-lg border border-error/20 bg-error-container/10 flex gap-md items-start">
+<span class="material-symbols-outlined text-error text-sm mt-1">remove</span>
+<p class="font-body-md text-body-md text-on-surface">Limited portfolio work on mobile-first apps</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Image Decorative Context -->
+<section class="w-full mt-4">
+<div class="h-48 w-full rounded-2xl overflow-hidden relative">
+<img alt="Career Analytics Background" class="w-full h-full object-cover" data-alt="A clean, professional workspace scene featuring a laptop displaying complex data analytics and colorful heatmaps. The environment is a bright, modern office with soft daylight streaming in, creating a calm and intelligent atmosphere. The color palette is dominated by corporate blues, soft indigos, and clean whites, reflecting a high-tech career transition tool's branding. The overall mood is sophisticated, purposeful, and technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4hrPns0xgK6Ni2bxvidH8F7b8gn5HiLn3cFBZkra_QK52LheeKNRFvyIc6Ju4jxCbR4aS8xmJrZfDTvG-rhiV1Nh1O3f-In94EKAprEXipHJGiHj2Rk76VU4uqAufAYOAqXPbTwbvOQmcVYpkrwVGb5E-VLSgZREo_TRcVAiGisRw0S9uduH3OVrjHV8LQ-G-lKZqJ9yKhniy4orzJVATWMgMqIV5IUUe8Wzsp8BwP8PBpfR09Vi-dDnLxcVfswb4a2ss-qjnHjEY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-lg">
+<p class="text-white font-label-lg text-label-lg">Powered by JobFit AI Engine v4.2</p>
+</div>
+</div>
+</section>
+<!-- Bottom Actions -->
+<div class="flex flex-col gap-md pt-lg">
+<button class="w-full h-12 flex items-center justify-center bg-primary text-on-primary rounded-full font-label-lg text-label-lg shadow-sm transition-all hover:shadow-md active:scale-95">
+                Save to History
+            </button>
+<button class="w-full h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg transition-all hover:bg-secondary-fixed-dim active:scale-95">
+                Analyse Another
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container shadow-sm flex justify-around items-center px-md py-sm">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Analyse (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-md text-label-md">Analyse</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

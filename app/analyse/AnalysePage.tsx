@@ -2,12 +2,8 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnalysisResults } from '@/components/analysis/AnalysisResults'
+import { PreferenceForm } from '@/components/preferences/PreferenceForm'
 import {
   Dialog,
   DialogContent,
@@ -15,11 +11,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { AnalysisResults } from '@/components/analysis/AnalysisResults'
-import { PreferenceForm } from '@/components/preferences/PreferenceForm'
-import { Loader2, Settings2, AlertCircle, ChevronDown, ChevronUp, RefreshCw } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-import type { Phase1Result, Gap, Pro, Con, PreferenceAlignment, UserPreferences, ConfidenceTier } from '@/lib/types'
+import type {
+  Phase1Result,
+  Gap,
+  Pro,
+  Con,
+  PreferenceAlignment,
+  UserPreferences,
+  ConfidenceTier,
+} from '@/lib/types'
 
 interface AnalysisState {
   status: 'idle' | 'loading' | 'done' | 'error'
@@ -43,10 +45,10 @@ const initialState: AnalysisState = {
   error: null,
 }
 
-const confidenceColors: Record<string, string> = {
-  HIGH: 'bg-green-600 text-white',
-  MEDIUM: 'bg-amber-500 text-white',
-  LOW: 'bg-red-500 text-white',
+const confidenceBadge: Record<string, { bg: string; text: string }> = {
+  HIGH: { bg: 'bg-high-confidence-container', text: 'text-high-confidence' },
+  MEDIUM: { bg: 'bg-medium-confidence-container', text: 'text-medium-confidence' },
+  LOW: { bg: 'bg-low-confidence-container', text: 'text-low-confidence' },
 }
 
 interface InitialJd {
@@ -69,7 +71,6 @@ export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props)
   const [jdCompany, setJdCompany] = useState(initialJd?.company ?? '')
   const [preferences, setPreferences] = useState<Partial<UserPreferences>>(initialPreferences)
   const [analysisState, setAnalysisState] = useState<AnalysisState>(initialState)
-  const [showPreferences, setShowPreferences] = useState(false)
   const abortRef = useRef<AbortController | null>(null)
 
   const handleAnalyse = async () => {
@@ -77,13 +78,10 @@ export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props)
       toast.error('Please paste a job description (at least 50 characters).')
       return
     }
-
     abortRef.current?.abort()
     const controller = new AbortController()
     abortRef.current = controller
-
     setAnalysisState({ ...initialState, status: 'loading' })
-
     try {
       const response = await fetch('/api/analysis/create', {
         method: 'POST',
@@ -103,29 +101,21 @@ export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props)
         }),
         signal: controller.signal,
       })
-
-      if (!response.ok || !response.body) {
-        throw new Error('Failed to start analysis.')
-      }
-
+      if (!response.ok || !response.body) throw new Error('Failed to start analysis.')
       const reader = response.body.getReader()
       const decoder = new TextDecoder()
       let lastEvent = ''
-
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
-
         const chunk = decoder.decode(value, { stream: true })
         const lines = chunk.split('\n')
-
         for (const line of lines) {
           if (line.startsWith('event: ')) {
             lastEvent = line.replace('event: ', '').trim()
           } else if (line.startsWith('data: ')) {
             try {
               const data = JSON.parse(line.replace('data: ', ''))
-
               if (lastEvent === 'confidence') {
                 setAnalysisState((prev) => ({ ...prev, confidence: data }))
               } else if (lastEvent === 'gaps') {
@@ -138,11 +128,7 @@ export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props)
                   preferenceAlignment: data.preference_alignment ?? null,
                 }))
               } else if (lastEvent === 'done') {
-                setAnalysisState((prev) => ({
-                  ...prev,
-                  status: 'done',
-                  analysisId: data.analysisId,
-                }))
+                setAnalysisState((prev) => ({ ...prev, status: 'done', analysisId: data.analysisId }))
               } else if (lastEvent === 'error') {
                 setAnalysisState((prev) => ({
                   ...prev,
@@ -174,24 +160,32 @@ export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props)
     setJdCompany('')
   }
 
+  const isLoading = analysisState.status === 'loading'
+
   return (
     <div className="max-w-6xl mx-auto">
+      {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">Analyse a Job</h1>
-        <p className="text-muted-foreground text-sm mt-1">
-          Paste a job description and get an instant fit analysis.
+        <h1
+          className="font-bold text-on-surface"
+          style={{ fontFamily: 'Source Sans 3', fontSize: '32px', lineHeight: '40px' }}
+        >
+          Analyse a Job
+        </h1>
+        <p className="text-on-surface-variant text-sm mt-1">
+          Paste a job description to get your personalised match analysis.
         </p>
       </div>
 
       {/* Re-analyse banner */}
       {initialJd && (
-        <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/60 dark:bg-violet-950/20 p-4 flex items-start gap-3 mb-6">
-          <RefreshCw className="h-5 w-5 text-violet-500 shrink-0 mt-0.5" />
+        <div className="rounded-xl border border-secondary-container bg-primary/5 p-4 flex items-start gap-3 mb-6">
+          <span className="material-symbols-outlined text-primary shrink-0 mt-0.5" style={{ fontSize: '20px' }}>
+            refresh
+          </span>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-violet-800 dark:text-violet-200">
-              Re-analysing with your current CV
-            </p>
-            <p className="text-xs text-violet-600 dark:text-violet-400 mt-0.5 flex items-center gap-2 flex-wrap">
+            <p className="text-sm font-medium text-on-surface">Re-analysing with your current CV</p>
+            <p className="text-xs text-on-surface-variant mt-0.5 flex items-center gap-2 flex-wrap">
               <span>
                 Pre-filled from:{' '}
                 <span className="font-medium">
@@ -199,143 +193,168 @@ export function AnalysePage({ hasVector, initialPreferences, initialJd }: Props)
                   {initialJd.company && ` at ${initialJd.company}`}
                 </span>
               </span>
-              {initialJd.parentConfidence && (
+              {initialJd.parentConfidence && confidenceBadge[initialJd.parentConfidence] && (
                 <span className="flex items-center gap-1">
                   · Original score:
-                  <Badge className={`text-xs ${confidenceColors[initialJd.parentConfidence]}`}>
+                  <span
+                    className={`text-xs font-medium px-2 py-0.5 rounded-full ${confidenceBadge[initialJd.parentConfidence].bg} ${confidenceBadge[initialJd.parentConfidence].text}`}
+                  >
                     {initialJd.parentConfidence}
-                  </Badge>
+                  </span>
                 </span>
               )}
             </p>
           </div>
           <Link href={`/analyse/${initialJd.parentId}`} className="shrink-0">
-            <Button variant="outline" size="sm" className="text-xs h-7 border-violet-300 dark:border-violet-700">
+            <button className="border border-outline-variant text-on-surface-variant text-xs rounded-full px-3 py-1.5 hover:bg-surface-container transition-colors">
               View original
-            </Button>
+            </button>
           </Link>
         </div>
       )}
 
+      {/* No CV warning */}
       {!hasVector && (
-        <div className="rounded-xl border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/20 p-4 flex items-start gap-3 mb-6">
-          <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+        <div className="rounded-xl border border-[#FFE0B2] bg-[#FFF8E1] p-4 flex items-start gap-3 mb-6">
+          <span className="material-symbols-outlined text-[#E65100] shrink-0 mt-0.5" style={{ fontSize: '20px' }}>
+            warning
+          </span>
           <div>
-            <p className="text-sm font-medium text-amber-800 dark:text-amber-200">No CV uploaded yet</p>
-            <p className="text-xs text-amber-700 dark:text-amber-300 mt-0.5">
+            <p className="text-sm font-medium text-[#E65100]">No CV uploaded yet</p>
+            <p className="text-xs text-[#BF360C] mt-0.5">
               <Link href="/dashboard" className="underline">Upload your CV</Link> first to enable analysis.
             </p>
           </div>
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
         {/* Left: JD input */}
         <div className="space-y-4">
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base">Job Description</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label>Job Title (optional)</Label>
-                  <Input
-                    placeholder="e.g. Senior Engineer"
-                    value={jdTitle}
-                    onChange={(e) => setJdTitle(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label>Company (optional)</Label>
-                  <Input
-                    placeholder="e.g. Acme Corp"
-                    value={jdCompany}
-                    onChange={(e) => setJdCompany(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="space-y-1.5">
-                <Label>Job Description *</Label>
-                <Textarea
-                  placeholder="Paste the full job description here..."
-                  value={jdText}
-                  onChange={(e) => setJdText(e.target.value)}
-                  className="min-h-[280px] font-mono text-sm resize-y"
+          <div
+            className="bg-card rounded-2xl p-5"
+            style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)' }}
+          >
+            <label
+              className="block text-sm font-medium text-on-surface mb-3"
+              style={{ fontFamily: 'Source Sans 3' }}
+            >
+              Job Description
+            </label>
+            <textarea
+              placeholder="Paste the job description here..."
+              value={jdText}
+              onChange={(e) => setJdText(e.target.value)}
+              className="w-full min-h-[280px] p-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm text-on-surface placeholder:text-on-surface-variant/50 resize-y focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 font-mono leading-relaxed"
+            />
+            <p className="text-xs text-on-surface-variant mt-2">
+              {jdText.length} characters
+              {jdText.length < 50 && jdText.length > 0 && ' · minimum 50'}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+              <div>
+                <label className="block text-xs font-medium text-on-surface-variant mb-1.5">
+                  Job Title (optional)
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Senior Engineer"
+                  value={jdTitle}
+                  onChange={(e) => setJdTitle(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
-                <p className="text-xs text-muted-foreground">
-                  {jdText.length} characters {jdText.length < 50 && jdText.length > 0 && '· minimum 50'}
-                </p>
               </div>
-
-              <div className="flex flex-wrap gap-3 items-center">
-                <Button
-                  onClick={handleAnalyse}
-                  disabled={analysisState.status === 'loading' || !hasVector || jdText.length < 50}
-                  className="gap-2"
-                >
-                  {analysisState.status === 'loading' ? (
-                    <><Loader2 className="h-4 w-4 animate-spin" />Analysing...</>
-                  ) : initialJd ? (
-                    <><RefreshCw className="h-4 w-4" />Re-analyse Fit</>
-                  ) : (
-                    'Analyse Fit'
-                  )}
-                </Button>
-
-                {/* Mobile preferences toggle */}
-                <div className="lg:hidden">
-                  <Dialog>
-                    <DialogTrigger render={<Button variant="outline" size="sm" className="gap-1.5" />}>
-                      <Settings2 className="h-4 w-4" />
-                      Preferences
-                    </DialogTrigger>
-                    <DialogContent className="max-w-sm">
-                      <DialogHeader>
-                        <DialogTitle>Preferences</DialogTitle>
-                      </DialogHeader>
-                      <PreferenceForm
-                        initialPreferences={preferences}
-                        onSave={(p) => setPreferences(p)}
-                        compact
-                      />
-                    </DialogContent>
-                  </Dialog>
-                </div>
+              <div>
+                <label className="block text-xs font-medium text-on-surface-variant mb-1.5">
+                  Company (optional)
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Acme Corp"
+                  value={jdCompany}
+                  onChange={(e) => setJdCompany(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
               </div>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Results */}
+            <div className="flex gap-3 mt-5">
+              <button
+                onClick={handleAnalyse}
+                disabled={isLoading || !hasVector || jdText.length < 50}
+                className="flex-1 flex items-center justify-center gap-2 bg-primary text-white rounded-full py-3.5 px-6 font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+                style={{ fontFamily: 'Roboto Flex' }}
+              >
+                {isLoading ? (
+                  <><Loader2 className="h-4 w-4 animate-spin" /> Analysing...</>
+                ) : initialJd ? (
+                  <>
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>refresh</span>
+                    Re-analyse Fit
+                  </>
+                ) : (
+                  <>
+                    Analyse My Fit
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+                  </>
+                )}
+              </button>
+
+              <div className="lg:hidden">
+                <Dialog>
+                  <DialogTrigger
+                    render={
+                      <button className="flex items-center gap-2 border border-outline-variant text-on-surface-variant rounded-full py-3.5 px-4 text-sm hover:bg-surface-container transition-colors">
+                        <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>tune</span>
+                        Prefs
+                      </button>
+                    }
+                  />
+                  <DialogContent className="max-w-sm">
+                    <DialogHeader>
+                      <DialogTitle>Preferences</DialogTitle>
+                    </DialogHeader>
+                    <PreferenceForm
+                      initialPreferences={preferences}
+                      onSave={(p) => setPreferences(p)}
+                      compact
+                    />
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+          </div>
+
           <AnalysisResults state={analysisState} onReset={handleReset} />
         </div>
 
         {/* Right: Preferences (desktop) */}
         <div className="hidden lg:block">
-          <Card>
-            <CardHeader
-              className="pb-3 cursor-pointer select-none"
-              onClick={() => setShowPreferences(!showPreferences)}
-            >
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Settings2 className="h-4 w-4" />
-                  Preferences
-                </CardTitle>
-                {showPreferences ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-              </div>
-              <p className="text-xs text-muted-foreground">Influence the analysis weighting</p>
-            </CardHeader>
-            {showPreferences && (
-              <CardContent>
-                <PreferenceForm
-                  initialPreferences={preferences}
-                  onSave={(p) => setPreferences(p)}
-                  compact
-                />
-              </CardContent>
-            )}
-          </Card>
+          <div
+            className="bg-card rounded-2xl p-5 sticky top-8"
+            style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)' }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3
+                className="font-medium text-on-surface"
+                style={{ fontFamily: 'Source Sans 3', fontSize: '16px' }}
+              >
+                Your Preferences
+              </h3>
+              <span
+                className="material-symbols-outlined text-on-surface-variant"
+                style={{ fontSize: '18px' }}
+              >
+                edit
+              </span>
+            </div>
+            <PreferenceForm
+              initialPreferences={preferences}
+              onSave={(p) => setPreferences(p)}
+              compact
+            />
+          </div>
         </div>
       </div>
     </div>

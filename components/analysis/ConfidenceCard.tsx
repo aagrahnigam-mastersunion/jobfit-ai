@@ -1,28 +1,32 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import type { Phase1Result } from '@/lib/types'
 
 const confidenceConfig = {
   HIGH: {
-    color: 'bg-green-600 text-white hover:bg-green-700',
+    bg: 'bg-high-confidence-container',
+    borderColor: '#2E7D32',
+    badgeBg: 'bg-high-confidence',
     label: 'HIGH MATCH',
-    border: 'border-green-200',
-    bg: 'bg-green-50 dark:bg-green-950/20',
+    strengthColor: 'text-high-confidence',
+    concernColor: 'text-medium-confidence',
   },
   MEDIUM: {
-    color: 'bg-amber-500 text-white hover:bg-amber-600',
+    bg: 'bg-medium-confidence-container',
+    borderColor: '#E65100',
+    badgeBg: 'bg-medium-confidence',
     label: 'MEDIUM MATCH',
-    border: 'border-amber-200',
-    bg: 'bg-amber-50 dark:bg-amber-950/20',
+    strengthColor: 'text-high-confidence',
+    concernColor: 'text-medium-confidence',
   },
   LOW: {
-    color: 'bg-red-500 text-white hover:bg-red-600',
+    bg: 'bg-low-confidence-container',
+    borderColor: '#C62828',
+    badgeBg: 'bg-low-confidence',
     label: 'LOW MATCH',
-    border: 'border-red-200',
-    bg: 'bg-red-50 dark:bg-red-950/20',
+    strengthColor: 'text-high-confidence',
+    concernColor: 'text-low-confidence',
   },
 }
 
@@ -39,49 +43,88 @@ export function ConfidenceCard({ data }: Props) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <Card className={`border-2 ${config.border} ${config.bg}`}>
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle className="text-lg">Match Confidence</CardTitle>
-            <Badge className={`text-sm px-3 py-1 ${config.color}`}>
-              {config.label}
-            </Badge>
-          </div>
-          {data.latency && (
-            <p className="text-xs text-muted-foreground">
-              Assessed in {(data.latency / 1000).toFixed(1)}s
+      <div
+        className={`rounded-2xl ${config.bg} p-6`}
+        style={{
+          borderLeft: `4px solid ${config.borderColor}`,
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06)',
+        }}
+      >
+        {/* Badge + latency */}
+        <div className="flex items-start justify-between gap-4 mb-4 flex-wrap">
+          <div>
+            <p
+              className="text-xs font-medium text-on-surface-variant mb-2"
+              style={{ letterSpacing: '0.5px', textTransform: 'uppercase' }}
+            >
+              Match Confidence
             </p>
-          )}
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground">{data.summary}</p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="rounded-lg border bg-background p-3">
-              <p className="text-xs font-medium text-green-600 mb-1">Top Strength</p>
-              <p className="text-sm">{data.top_strength}</p>
-            </div>
-            <div className="rounded-lg border bg-background p-3">
-              <p className="text-xs font-medium text-red-500 mb-1">Top Concern</p>
-              <p className="text-sm">{data.top_concern}</p>
-            </div>
+            <span
+              className={`inline-flex items-center ${config.badgeBg} text-white text-sm font-bold px-4 py-1.5 rounded-full`}
+              style={{ letterSpacing: '0.5px' }}
+            >
+              {config.label}
+            </span>
+            {data.latency && (
+              <p className="text-xs text-on-surface-variant mt-2">
+                Assessed in {(data.latency / 1000).toFixed(1)}s
+              </p>
+            )}
           </div>
+        </div>
 
-          {data.confidence_factors?.length > 0 && (
-            <div>
-              <p className="text-xs font-medium text-muted-foreground mb-2">Key Factors</p>
-              <ul className="space-y-1">
-                {data.confidence_factors.map((factor, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm">
-                    <span className="text-muted-foreground mt-0.5">•</span>
-                    <span>{factor}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        {/* Summary */}
+        <p className="text-sm text-on-surface leading-relaxed mb-4">{data.summary}</p>
+
+        {/* Strength + Concern */}
+        {(data.top_strength || data.top_concern) && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            {data.top_strength && (
+              <div className="bg-white/70 rounded-xl p-3">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span
+                    className="material-symbols-outlined text-high-confidence"
+                    style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}
+                  >
+                    check_circle
+                  </span>
+                  <p className="text-xs font-medium text-high-confidence">Top Strength</p>
+                </div>
+                <p className="text-sm text-on-surface">{data.top_strength}</p>
+              </div>
+            )}
+            {data.top_concern && (
+              <div className="bg-white/70 rounded-xl p-3">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span
+                    className="material-symbols-outlined text-medium-confidence"
+                    style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}
+                  >
+                    warning
+                  </span>
+                  <p className="text-xs font-medium text-medium-confidence">Top Concern</p>
+                </div>
+                <p className="text-sm text-on-surface">{data.top_concern}</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Key factors */}
+        {data.confidence_factors?.length > 0 && (
+          <div>
+            <p className="text-xs font-medium text-on-surface-variant mb-2">Key Factors</p>
+            <ul className="space-y-1">
+              {data.confidence_factors.map((factor, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-on-surface">
+                  <span className="text-on-surface-variant mt-0.5 shrink-0">•</span>
+                  <span>{factor}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </motion.div>
   )
 }

@@ -6,19 +6,20 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { ArrowLeft, Trash2, Clock, RefreshCw } from 'lucide-react'
 import { ConfidenceCard } from '@/components/analysis/ConfidenceCard'
 import { GapCard } from '@/components/analysis/GapCard'
 import { ProsConsPanel } from '@/components/analysis/ProsConsPanel'
-import { ArrowLeft, Trash2, Clock, RefreshCw, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatDistanceToNow } from 'date-fns'
 import type { Analysis, Phase1Result, ConfidenceTier } from '@/lib/types'
 import type { ParentSummary } from './page'
 
 const confidenceColors: Record<string, string> = {
-  HIGH: 'bg-green-600 text-white',
-  MEDIUM: 'bg-amber-500 text-white',
-  LOW: 'bg-red-500 text-white',
+  HIGH: 'bg-high-confidence-container text-high-confidence',
+  MEDIUM: 'bg-medium-confidence-container text-medium-confidence',
+  LOW: 'bg-low-confidence-container text-low-confidence',
 }
 
 interface Props {
@@ -171,7 +172,7 @@ export function AnalysisDetailClient({ analysis, parentAnalysis }: Props) {
       {/* Gaps */}
       {analysis.gaps.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="space-y-3">
-          <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Gap Taxonomy</h2>
+          <h2 className="text-xs font-medium text-on-surface-variant uppercase tracking-wider" style={{ letterSpacing: '0.5px' }}>Gap Taxonomy</h2>
           {analysis.gaps.map((gap, i) => (
             <GapCard key={i} gap={gap} index={i} />
           ))}
@@ -181,7 +182,7 @@ export function AnalysisDetailClient({ analysis, parentAnalysis }: Props) {
       {/* Pros & Cons */}
       {analysis.pros.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="space-y-3">
-          <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Pros &amp; Cons</h2>
+          <h2 className="text-xs font-medium text-on-surface-variant uppercase tracking-wider" style={{ letterSpacing: '0.5px' }}>Pros &amp; Cons</h2>
           <ProsConsPanel pros={analysis.pros} cons={analysis.cons} />
         </motion.div>
       )}

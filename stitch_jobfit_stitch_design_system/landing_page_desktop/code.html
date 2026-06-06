@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFit AI - Know Your Fit Before You Apply</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#CAC4D0",
+                      "surface-dim": "#dcd9dc",
+                      "background": "#fcf8fb",
+                      "success-container": "#D4F0EC",
+                      "outline": "#79747E",
+                      "on-tertiary-container": "#bbfff2",
+                      "primary-container": "#3d5afe",
+                      "on-surface": "#1c1b1d",
+                      "inverse-on-surface": "#f3f0f3",
+                      "elevated-surface-1": "#F7F2FA",
+                      "tertiary-container": "#007c6f",
+                      "surface-tint": "#2848ee",
+                      "on-background": "#1c1b1d",
+                      "high-confidence-container": "#E8F5E9",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#bbc3ff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#f1f0ff",
+                      "tertiary": "#006157",
+                      "on-primary-fixed-variant": "#002ccd",
+                      "medium-confidence-container": "#FFF3E0",
+                      "secondary-fixed-dim": "#bac3ff",
+                      "on-secondary": "#ffffff",
+                      "surface": "#fcf8fb",
+                      "on-secondary-container": "#27378a",
+                      "low-confidence": "#C62828",
+                      "elevated-surface-2": "#F3EDF7",
+                      "on-error-container": "#93000a",
+                      "medium-confidence": "#E65100",
+                      "surface-bright": "#fcf8fb",
+                      "secondary": "#4858ab",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#00105b",
+                      "inverse-surface": "#313032",
+                      "surface-container-highest": "#e5e1e4",
+                      "primary": "#183ce6",
+                      "primary-fixed": "#dee0ff",
+                      "on-surface-variant": "#444656",
+                      "on-primary-fixed": "#000f5d",
+                      "tertiary-fixed-dim": "#70d8c8",
+                      "secondary-container": "#96a5ff",
+                      "secondary-fixed": "#dee0ff",
+                      "on-secondary-fixed-variant": "#2f3f92",
+                      "primary-fixed-dim": "#bbc3ff",
+                      "surface-container-low": "#f6f2f5",
+                      "surface-container-high": "#ebe7ea",
+                      "on-tertiary-fixed": "#00201c",
+                      "surface-variant": "#e5e1e4",
+                      "tertiary-fixed": "#8df5e4",
+                      "high-confidence": "#2E7D32",
+                      "surface-container": "#f0edf0",
+                      "low-confidence-container": "#FFEBEE",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed-variant": "#005048",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "4xl": "64px",
+                      "3xl": "48px",
+                      "sm": "8px",
+                      "margin-mobile": "16px",
+                      "lg": "16px",
+                      "gutter-desktop": "24px",
+                      "md": "12px",
+                      "margin-desktop": "auto",
+                      "base": "4px",
+                      "xs": "4px",
+                      "2xl": "32px",
+                      "xl": "24px",
+                      "gutter-mobile": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Source Sans 3"],
+                      "label-lg": ["Roboto Flex"],
+                      "title-md": ["Source Sans 3"],
+                      "title-lg": ["Source Sans 3"],
+                      "headline-lg": ["Source Sans 3"],
+                      "body-sm": ["Roboto Flex"],
+                      "label-md": ["Roboto Flex"],
+                      "headline-lg-mobile": ["Source Sans 3"],
+                      "body-md": ["Roboto Flex"],
+                      "display-lg": ["Source Sans 3"],
+                      "body-lg": ["Roboto Flex"],
+                      "label-sm": ["Roboto Flex"]
+              },
+              "fontSize": {
+                      "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                      "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "0px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "400"}],
+                      "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.4px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                      "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fcf8fb;
+            color: #1c1b1d;
+            overflow-x: hidden;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .max-canvas {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface sticky top-0 z-50 transition-all duration-300 h-16 flex items-center">
+<div class="max-canvas w-full flex justify-between items-center">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[32px]">analytics</span>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">JobFit AI</span>
+</div>
+<div class="flex items-center gap-lg">
+<button class="px-lg py-sm border border-outline rounded-full font-label-lg text-label-lg text-primary hover:bg-surface-container-low transition-colors">
+                    Sign In
+                </button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="py-4xl text-center bg-gradient-to-b from-surface to-elevated-surface-1">
+<div class="max-canvas flex flex-col items-center">
+<span class="px-md py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md mb-xl animate-fade-in">
+                    Powered by Gemini AI 1.5 Pro
+                </span>
+<h1 class="font-display-lg text-display-lg max-w-4xl text-on-surface mb-xl font-bold tracking-tight">
+                    Know Your Fit Before You Apply
+                </h1>
+<p class="font-title-lg text-title-lg text-on-surface-variant max-w-2xl mb-3xl">
+                    Stop guessing. Use advanced AI to analyze how your unique skills and preferences align with any role in seconds.
+                </p>
+<div class="flex flex-row gap-lg">
+<button class="px-2xl h-12 bg-primary text-on-primary rounded-full font-label-lg text-label-lg flex items-center justify-center hover:shadow-lg transition-all active:scale-95">
+                        Get Started Free
+                    </button>
+<button class="px-2xl h-12 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg flex items-center justify-center hover:bg-opacity-80 transition-all">
+                        See How It Works
+                    </button>
+</div>
+<div class="mt-4xl w-full max-w-5xl rounded-xl overflow-hidden shadow-2xl border border-outline-variant">
+<img alt="JobFit AI Dashboard Preview" class="w-full h-auto" data-alt="A high-fidelity dashboard interface of a career management platform. The screen displays a clean, modern data visualization with colorful bar charts, match percentage gauges, and a skill gap analysis table. The lighting is bright and professional with a soft blue and purple color palette that feels technologically sophisticated and approachable. The aesthetic is minimalist and data-driven." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADcjZ-hxV5tAHMA10goEImCWMENkF6JIQroFSMMwJymaej7uEu1jr91wwdc9UOmjSe2V7z2oJvpBaa5mi-pGFifp4B6XNX46X8S2fYVfRy84XJqkmH2Uq_3TCrTWfzoMq72syYvnEhaRNSII5ieLB_YHW-OP8VkHDF0WC4xVYPGk80_hEMkAvgCziT27Ucq61By_PWhcD6q4gHCHzyESjqUUatKZpzATf1aOG4rUWl93ucrZsjd3fWp6v5Vl7uRgD4tGcubYCDqxdJ"/>
+</div>
+</div>
+</section>
+<!-- Feature Cards Section -->
+<section class="py-4xl bg-background">
+<div class="max-canvas">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl">
+<!-- Card 1: Match Confidence -->
+<div class="bg-surface-container p-xl rounded-xl border-l-4 border-high-confidence shadow-sm flex flex-col gap-md hover:translate-y-[-4px] transition-transform">
+<div class="w-12 h-12 rounded-full bg-high-confidence-container flex items-center justify-center">
+<span class="material-symbols-outlined text-high-confidence">check_circle</span>
+</div>
+<h3 class="font-title-lg text-title-lg font-bold">Match Confidence</h3>
+<p class="text-on-surface-variant">Our proprietary AI score calculates your technical and cultural alignment with high-precision confidence tiers.</p>
+<div class="mt-auto pt-lg">
+<span class="text-high-confidence font-bold text-headline-md">94% Fit</span>
+</div>
+</div>
+<!-- Card 2: Gap Taxonomy -->
+<div class="bg-surface-container p-xl rounded-xl border-l-4 border-medium-confidence shadow-sm flex flex-col gap-md hover:translate-y-[-4px] transition-transform">
+<div class="w-12 h-12 rounded-full bg-medium-confidence-container flex items-center justify-center">
+<span class="material-symbols-outlined text-medium-confidence">psychology</span>
+</div>
+<h3 class="font-title-lg text-title-lg font-bold">Gap Taxonomy</h3>
+<p class="text-on-surface-variant">Identify exactly which skills are missing. We break down gaps into actionable learning paths and certification needs.</p>
+<div class="mt-auto pt-lg flex flex-wrap gap-xs">
+<span class="px-sm py-xs bg-outline-variant rounded-full text-label-sm font-label-sm">React Native</span>
+<span class="px-sm py-xs bg-outline-variant rounded-full text-label-sm font-label-sm">System Design</span>
+</div>
+</div>
+<!-- Card 3: Preference-Weighted -->
+<div class="bg-surface-container p-xl rounded-xl border-l-4 border-primary shadow-sm flex flex-col gap-md hover:translate-y-[-4px] transition-transform">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">tune</span>
+</div>
+<h3 class="font-title-lg text-title-lg font-bold">Preference-Weighted</h3>
+<p class="text-on-surface-variant">Weight your results based on what matters most to you: salary, remote flexibility, or company growth stage.</p>
+<div class="mt-auto pt-lg">
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="py-4xl bg-elevated-surface-2">
+<div class="max-canvas">
+<div class="text-center mb-3xl">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">How It Works</h2>
+<p class="text-on-surface-variant font-title-md text-title-md mt-md">Three simple steps to your dream role</p>
+</div>
+<div class="flex flex-col md:flex-row gap-2xl items-start justify-between relative">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col items-center text-center gap-lg">
+<div class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md font-bold shadow-lg">1</div>
+<div>
+<h4 class="font-title-lg text-title-lg font-bold mb-xs">Upload Profile</h4>
+<p class="text-on-surface-variant">Drop your resume or sync your LinkedIn profile in seconds.</p>
+</div>
+</div>
+<!-- Connector (Desktop) -->
+<div class="hidden md:block absolute top-8 left-[25%] right-[65%] h-px bg-outline-variant"></div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col items-center text-center gap-lg">
+<div class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md font-bold shadow-lg">2</div>
+<div>
+<h4 class="font-title-lg text-title-lg font-bold mb-xs">Paste Job Link</h4>
+<p class="text-on-surface-variant">Provide the URL for any job posting you're interested in.</p>
+</div>
+</div>
+<!-- Connector (Desktop) -->
+<div class="hidden md:block absolute top-8 left-[60%] right-[30%] h-px bg-outline-variant"></div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col items-center text-center gap-lg">
+<div class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md font-bold shadow-lg">3</div>
+<div>
+<h4 class="font-title-lg text-title-lg font-bold mb-xs">Analyze Fit</h4>
+<p class="text-on-surface-variant">Get a comprehensive alignment report and interview strategy.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-4xl">
+<div class="max-canvas">
+<div class="bg-primary-container p-4xl rounded-3xl flex flex-col md:flex-row items-center justify-between gap-xl">
+<div class="flex flex-col gap-md max-w-xl text-center md:text-left">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-primary-container">Ready to find your perfect fit?</h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container opacity-90">Join over 50,000 professionals using AI to navigate their career changes with confidence.</p>
+</div>
+<button class="px-3xl h-14 bg-on-primary-container text-primary rounded-full font-label-lg text-label-lg font-bold hover:shadow-xl transition-all active:scale-95 whitespace-nowrap">
+                        Analyze My Resume
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="py-2xl bg-surface border-t border-surface-container-highest">
+<div class="max-canvas flex flex-col items-center gap-lg">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">analytics</span>
+<span class="font-title-lg text-title-lg font-bold text-primary">JobFit AI</span>
+</div>
+<div class="flex gap-xl text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+<p class="text-on-surface-variant font-body-sm text-body-sm opacity-70">
+                JobFit AI · Built with Gemini AI
+            </p>
+<div class="mt-md text-on-surface-variant opacity-50 font-label-sm text-label-sm">
+                © 2024 JobFit Technologies Inc.
+            </div>
+</div>
+</footer>
+<script>
+        // Simple scroll effect for TopNavBar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md', 'bg-white/80', 'backdrop-blur-md');
+            } else {
+                nav.classList.remove('shadow-md', 'bg-white/80', 'backdrop-blur-md');
+            }
+        });
+
+        // Simple animation trigger for cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.rounded-xl').forEach(card => {
+            card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

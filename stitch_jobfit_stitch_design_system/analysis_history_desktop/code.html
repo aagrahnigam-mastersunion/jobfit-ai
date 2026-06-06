@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JobFit AI - Analysis History</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#CAC4D0",
+                    "surface-dim": "#dcd9dc",
+                    "background": "#fcf8fb",
+                    "success-container": "#D4F0EC",
+                    "outline": "#79747E",
+                    "on-tertiary-container": "#bbfff2",
+                    "primary-container": "#3d5afe",
+                    "on-surface": "#1c1b1d",
+                    "inverse-on-surface": "#f3f0f3",
+                    "elevated-surface-1": "#F7F2FA",
+                    "tertiary-container": "#007c6f",
+                    "surface-tint": "#2848ee",
+                    "on-background": "#1c1b1d",
+                    "high-confidence-container": "#E8F5E9",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#bbc3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#f1f0ff",
+                    "tertiary": "#006157",
+                    "on-primary-fixed-variant": "#002ccd",
+                    "medium-confidence-container": "#FFF3E0",
+                    "secondary-fixed-dim": "#bac3ff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fcf8fb",
+                    "on-secondary-container": "#27378a",
+                    "low-confidence": "#C62828",
+                    "elevated-surface-2": "#F3EDF7",
+                    "on-error-container": "#93000a",
+                    "medium-confidence": "#E65100",
+                    "surface-bright": "#fcf8fb",
+                    "secondary": "#4858ab",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#00105b",
+                    "inverse-surface": "#313032",
+                    "surface-container-highest": "#e5e1e4",
+                    "primary": "#183ce6",
+                    "primary-fixed": "#dee0ff",
+                    "on-surface-variant": "#444656",
+                    "on-primary-fixed": "#000f5d",
+                    "tertiary-fixed-dim": "#70d8c8",
+                    "secondary-container": "#96a5ff",
+                    "secondary-fixed": "#dee0ff",
+                    "on-secondary-fixed-variant": "#2f3f92",
+                    "primary-fixed-dim": "#bbc3ff",
+                    "surface-container-low": "#f6f2f5",
+                    "surface-container-high": "#ebe7ea",
+                    "on-tertiary-fixed": "#00201c",
+                    "surface-variant": "#e5e1e4",
+                    "tertiary-fixed": "#8df5e4",
+                    "high-confidence": "#2E7D32",
+                    "surface-container": "#f0edf0",
+                    "low-confidence-container": "#FFEBEE",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#005048",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "4xl": "64px",
+                    "3xl": "48px",
+                    "sm": "8px",
+                    "margin-mobile": "16px",
+                    "lg": "16px",
+                    "gutter-desktop": "24px",
+                    "md": "12px",
+                    "margin-desktop": "auto",
+                    "base": "4px",
+                    "xs": "4px",
+                    "2xl": "32px",
+                    "xl": "24px",
+                    "gutter-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Source Sans 3"],
+                    "label-lg": ["Roboto Flex"],
+                    "title-md": ["Source Sans 3"],
+                    "title-lg": ["Source Sans 3"],
+                    "headline-lg": ["Source Sans 3"],
+                    "body-sm": ["Roboto Flex"],
+                    "label-md": ["Roboto Flex"],
+                    "headline-lg-mobile": ["Source Sans 3"],
+                    "body-md": ["Roboto Flex"],
+                    "display-lg": ["Source Sans 3"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-sm": ["Roboto Flex"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "0px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.4px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fcf8fb;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="w-[80px] lg:w-[240px] h-screen fixed left-0 top-0 bg-elevated-surface-2 dark:bg-surface-container flex flex-col items-center py-xl gap-4xl z-50">
+<div class="flex items-center gap-3 px-4 w-full justify-center lg:justify-start">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<span class="hidden lg:block font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">JobFit AI</span>
+</div>
+<nav class="flex flex-col gap-2 w-full px-4">
+<!-- Home -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors rounded-full lg:rounded-xl lg:px-4 lg:py-3 lg:justify-start lg:gap-4 group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">home</span>
+<span class="hidden lg:block font-label-lg text-label-lg">Home</span>
+</a>
+<!-- Analyse -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors rounded-full lg:rounded-xl lg:px-4 lg:py-3 lg:justify-start lg:gap-4 group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">analytics</span>
+<span class="hidden lg:block font-label-lg text-label-lg">Analyse</span>
+</a>
+<!-- History (ACTIVE) -->
+<a class="flex items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full w-14 h-8 lg:w-full lg:px-4 lg:py-3 lg:justify-start lg:gap-4 scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="hidden lg:block font-label-lg text-label-lg">History</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors rounded-full lg:rounded-xl lg:px-4 lg:py-3 lg:justify-start lg:gap-4 group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">settings</span>
+<span class="hidden lg:block font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<div class="mt-auto w-full px-4 flex flex-col items-center gap-4">
+<img alt="User Profile" class="w-10 h-10 rounded-full bg-surface-container-highest object-cover" data-alt="A professional headshot of a friendly career advisor in a modern minimalist office with soft natural lighting, wearing smart casual business attire, smiling warmly toward the camera. The background is slightly blurred with soft indigo and white tones to match a corporate UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYksjcx4NH3AHKlN6-ayb_fYHTieJ5n98ix2MEH4D7EsYqxNcb9voemDVX9dGeq-TshtHH6sQm9rx2N5LMJ0x3hLU-pd8WHmpCEiraf5t_d5J0F31Fqz1DvYP_K4SGpppxGf3bri0124SzOp5rynzzETbpnFPCApUs_V8vT05SglpROwavRFdv_9qxPV1m51yxAzO6-cV00cDRVwrZSw8XqfyjhFeTTmFZ56Qst9Gsqp06VeV3hodLmxmB6jr5sG2yMbIwE9JTxr5Y"/>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[80px] lg:ml-[240px] min-h-screen flex flex-col">
+<!-- TopNavBar Anchor -->
+<header class="docked full-width top-0 sticky bg-surface dark:bg-surface-dim flex justify-between items-center h-16 px-gutter-desktop z-40">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed lg:hidden">JobFit AI</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-6 py-2 bg-primary text-on-primary rounded-full font-label-lg text-label-lg hover:opacity-90 active:scale-95 transition-all">
+                    Sign In
+                </button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer text-[24px]">account_circle</span>
+</div>
+</header>
+<!-- Page Body -->
+<div class="flex-1 w-full max-w-[1200px] mx-auto px-gutter-desktop py-xl">
+<!-- Header Section -->
+<section class="mb-3xl">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Analysis History</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">12 analyses performed this month</p>
+</section>
+<!-- Search & Filters -->
+<section class="flex flex-col md:flex-row gap-lg items-center mb-2xl">
+<div class="relative w-full md:max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-full font-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search by role or company..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-sm items-center w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+<button class="h-8 px-lg bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md flex items-center justify-center whitespace-nowrap">All</button>
+<button class="h-8 px-lg border border-outline-variant text-on-surface-variant rounded-full font-label-md text-label-md flex items-center justify-center whitespace-nowrap hover:bg-surface-container transition-colors">HIGH</button>
+<button class="h-8 px-lg border border-outline-variant text-on-surface-variant rounded-full font-label-md text-label-md flex items-center justify-center whitespace-nowrap hover:bg-surface-container transition-colors">MEDIUM</button>
+<button class="h-8 px-lg border border-outline-variant text-on-surface-variant rounded-full font-label-md text-label-md flex items-center justify-center whitespace-nowrap hover:bg-surface-container transition-colors">LOW</button>
+</div>
+</section>
+<!-- Analysis List (Outlined Cards) -->
+<div class="flex flex-col gap-lg">
+<!-- Card 1: High Confidence -->
+<div class="flex items-center gap-lg p-lg bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-sm transition-shadow cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-high-confidence"></div>
+<div class="w-12 h-12 rounded-full bg-high-confidence-container flex items-center justify-center text-high-confidence font-bold">G</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Senior Frontend Engineer</h3>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Google • Analyzed 2 hours ago</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs uppercase tracking-wider">Gap: 3 skills identified</p>
+</div>
+<div class="flex flex-col items-end gap-sm">
+<span class="px-3 py-1 bg-high-confidence-container text-high-confidence rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            HIGH
+                        </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Card 2: Medium Confidence -->
+<div class="flex items-center gap-lg p-lg bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-sm transition-shadow cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-medium-confidence"></div>
+<div class="w-12 h-12 rounded-full bg-medium-confidence-container flex items-center justify-center text-medium-confidence font-bold">A</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Product Designer</h3>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Airbnb • Analyzed Yesterday</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs uppercase tracking-wider">Gap: 7 skills identified</p>
+</div>
+<div class="flex flex-col items-end gap-sm">
+<span class="px-3 py-1 bg-medium-confidence-container text-medium-confidence rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">error</span>
+                            MEDIUM
+                        </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Card 3: High Confidence -->
+<div class="flex items-center gap-lg p-lg bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-sm transition-shadow cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-high-confidence"></div>
+<div class="w-12 h-12 rounded-full bg-high-confidence-container flex items-center justify-center text-high-confidence font-bold">M</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Data Scientist</h3>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Microsoft • Analyzed 3 days ago</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs uppercase tracking-wider">Gap: 2 skills identified</p>
+</div>
+<div class="flex flex-col items-end gap-sm">
+<span class="px-3 py-1 bg-high-confidence-container text-high-confidence rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            HIGH
+                        </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Card 4: Low Confidence -->
+<div class="flex items-center gap-lg p-lg bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-sm transition-shadow cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-low-confidence"></div>
+<div class="w-12 h-12 rounded-full bg-low-confidence-container flex items-center justify-center text-low-confidence font-bold">S</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Fullstack Dev</h3>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Stripe • Analyzed Aug 12</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs uppercase tracking-wider">Gap: 14 skills identified</p>
+</div>
+<div class="flex flex-col items-end gap-sm">
+<span class="px-3 py-1 bg-low-confidence-container text-low-confidence rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+                            LOW
+                        </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Card 5: Medium Confidence -->
+<div class="flex items-center gap-lg p-lg bg-surface-container-lowest border border-outline-variant rounded-xl hover:shadow-sm transition-shadow cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-medium-confidence"></div>
+<div class="w-12 h-12 rounded-full bg-medium-confidence-container flex items-center justify-center text-medium-confidence font-bold">N</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">UX Researcher</h3>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Netflix • Analyzed Aug 10</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs uppercase tracking-wider">Gap: 6 skills identified</p>
+</div>
+<div class="flex flex-col items-end gap-sm">
+<span class="px-3 py-1 bg-medium-confidence-container text-medium-confidence rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">error</span>
+                            MEDIUM
+                        </span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Empty State / Load More -->
+<div class="mt-3xl flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-surface-container border border-outline-variant text-on-surface-variant rounded-full font-label-lg text-label-lg hover:bg-surface-variant transition-all active:scale-95">
+                    View Older Analyses
+                </button>
+</div>
+</div>
+</main>
+<!-- Contextual FAB for Main AI Action (Hidden as per rule "Suppress FAB on History/Settings") -->
+<!-- The FAB is suppressed here to maintain focus on history browsing -->
+<script>
+        // Simple ripple effect or interaction logic for cards
+        document.querySelectorAll('.border-outline-variant').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.99)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+
+        // Toggle Active Filter logic
+        const filterChips = document.querySelectorAll('button.rounded-full');
+        filterChips.forEach(chip => {
+            if (chip.textContent === 'Sign In' || chip.textContent === 'View Older Analyses') return;
+            
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => {
+                    if (c.textContent === 'Sign In' || c.textContent === 'View Older Analyses') return;
+                    c.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                    c.classList.add('border', 'border-outline-variant', 'text-on-surface-variant');
+                });
+                chip.classList.add('bg-secondary-container', 'text-on-secondary-container');
+                chip.classList.remove('border', 'border-outline-variant', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

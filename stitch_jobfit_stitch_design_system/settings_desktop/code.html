@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - JobFit AI</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#CAC4D0",
+                    "surface-dim": "#dcd9dc",
+                    "background": "#fcf8fb",
+                    "success-container": "#D4F0EC",
+                    "outline": "#79747E",
+                    "on-tertiary-container": "#bbfff2",
+                    "primary-container": "#3d5afe",
+                    "on-surface": "#1c1b1d",
+                    "inverse-on-surface": "#f3f0f3",
+                    "elevated-surface-1": "#F7F2FA",
+                    "tertiary-container": "#007c6f",
+                    "surface-tint": "#2848ee",
+                    "on-background": "#1c1b1d",
+                    "high-confidence-container": "#E8F5E9",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#bbc3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#f1f0ff",
+                    "tertiary": "#006157",
+                    "on-primary-fixed-variant": "#002ccd",
+                    "medium-confidence-container": "#FFF3E0",
+                    "secondary-fixed-dim": "#bac3ff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fcf8fb",
+                    "on-secondary-container": "#27378a",
+                    "low-confidence": "#C62828",
+                    "elevated-surface-2": "#F3EDF7",
+                    "on-error-container": "#93000a",
+                    "medium-confidence": "#E65100",
+                    "surface-bright": "#fcf8fb",
+                    "secondary": "#4858ab",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#00105b",
+                    "inverse-surface": "#313032",
+                    "surface-container-highest": "#e5e1e4",
+                    "primary": "#183ce6",
+                    "primary-fixed": "#dee0ff",
+                    "on-surface-variant": "#444656",
+                    "on-primary-fixed": "#000f5d",
+                    "tertiary-fixed-dim": "#70d8c8",
+                    "secondary-container": "#96a5ff",
+                    "secondary-fixed": "#dee0ff",
+                    "on-secondary-fixed-variant": "#2f3f92",
+                    "primary-fixed-dim": "#bbc3ff",
+                    "surface-container-low": "#f6f2f5",
+                    "surface-container-high": "#ebe7ea",
+                    "on-tertiary-fixed": "#00201c",
+                    "surface-variant": "#e5e1e4",
+                    "tertiary-fixed": "#8df5e4",
+                    "high-confidence": "#2E7D32",
+                    "surface-container": "#f0edf0",
+                    "low-confidence-container": "#FFEBEE",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#005048",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "4xl": "64px",
+                    "3xl": "48px",
+                    "sm": "8px",
+                    "margin-mobile": "16px",
+                    "lg": "16px",
+                    "gutter-desktop": "24px",
+                    "md": "12px",
+                    "margin-desktop": "auto",
+                    "base": "4px",
+                    "xs": "4px",
+                    "2xl": "32px",
+                    "xl": "24px",
+                    "gutter-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Source Sans 3"],
+                    "label-lg": ["Roboto Flex"],
+                    "title-md": ["Source Sans 3"],
+                    "title-lg": ["Source Sans 3"],
+                    "headline-lg": ["Source Sans 3"],
+                    "body-sm": ["Roboto Flex"],
+                    "label-md": ["Roboto Flex"],
+                    "headline-lg-mobile": ["Source Sans 3"],
+                    "body-md": ["Roboto Flex"],
+                    "display-lg": ["Source Sans 3"],
+                    "body-lg": ["Roboto Flex"],
+                    "label-sm": ["Roboto Flex"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "0px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.4px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "0px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf8fb;
+            min-height: 100vh;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #CAC4D0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Side Navigation Rail -->
+<aside class="w-[80px] lg:w-[240px] h-screen fixed left-0 top-0 bg-elevated-surface-2 dark:bg-surface-container flex flex-col items-center py-xl gap-4xl z-50">
+<div class="flex flex-col items-center lg:items-start lg:w-full lg:px-xl gap-sm">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-4xl">
+<span class="lg:hidden">JF</span>
+<span class="hidden lg:block">JobFit AI</span>
+</div>
+<nav class="flex flex-col gap-sm w-full">
+<!-- Home -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors rounded-full lg:rounded-xl lg:px-4 lg:py-3 lg:justify-start lg:gap-md group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">home</span>
+<span class="hidden lg:block font-label-lg text-label-lg">Home</span>
+</a>
+<!-- Analyse -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors rounded-full lg:rounded-xl lg:px-4 lg:py-3 lg:justify-start lg:gap-md group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">analytics</span>
+<span class="hidden lg:block font-label-lg text-label-lg">Analyse</span>
+</a>
+<!-- History -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors rounded-full lg:rounded-xl lg:px-4 lg:py-3 lg:justify-start lg:gap-md group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">history</span>
+<span class="hidden lg:block font-label-lg text-label-lg">History</span>
+</a>
+<!-- Settings (Active) -->
+<a class="flex items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full w-14 h-8 lg:w-full lg:px-4 lg:py-3 lg:justify-start lg:gap-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="hidden lg:block font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto pb-lg flex flex-col items-center">
+<img alt="User Profile" class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3YVcbRb6DOiWUsMW4dBDLYnEDJ0YehetXKZa3Ec_w_X3nb8tJBFvqn4A62qL0dfiWeDRBJm855sXKz7NS1BzF3WRY5dPtjBWpR1_dalFkLAHtWW0DXfHZXwkwGA7cuetb3CgtlSljQygNEa39O5YggrgJCCNNapI4DjRoUOVdsSakHPFz0WvFvqF7AfLjarPQTLMwfXtuOmVfZqoliJV2FaxBDo0MPqjKt_efqlrIXDW4Q28GdrS88-XCxZRR6Q8tsgHfjH2J6fcf"/>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="docked full-width top-0 sticky bg-surface dark:bg-surface-dim flex justify-between items-center h-16 px-gutter-desktop ml-[80px] lg:ml-[240px] z-40">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Settings</h1>
+<div class="flex items-center gap-md">
+<button class="p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="px-xl py-base font-label-lg text-label-lg font-bold border-2 border-primary text-primary rounded-full hover:bg-primary-container hover:text-on-primary-container transition-all">Sign In</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[80px] lg:ml-[240px] p-gutter-desktop min-h-[calc(100vh-64px)] flex gap-xl">
+<!-- Left Column: Settings Navigation -->
+<div class="hidden lg:block w-[240px] shrink-0">
+<nav class="flex flex-col gap-xs">
+<a class="flex items-center gap-md px-lg py-3 rounded-full bg-secondary-container text-on-secondary-container font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">tune</span>
+                    Preferences
+                </a>
+<a class="flex items-center gap-md px-lg py-3 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+                    Profile Information
+                </a>
+<a class="flex items-center gap-md px-lg py-3 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">notifications</span>
+                    Notifications
+                </a>
+<a class="flex items-center gap-md px-lg py-3 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">security</span>
+                    Security &amp; Privacy
+                </a>
+<a class="flex items-center gap-md px-lg py-3 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+                    Billing &amp; Subscription
+                </a>
+</nav>
+</div>
+<!-- Right Column: Preferences Panel -->
+<div class="flex-1 max-w-[800px]">
+<header class="mb-2xl">
+<h2 class="font-title-lg text-title-lg text-on-surface">Job Preferences</h2>
+<p class="font-body-md text-on-surface-variant mt-xs">Customize how AI suggests careers and opportunities based on your personal values.</p>
+</header>
+<!-- Preferences Form Card -->
+<div class="bg-elevated-surface-1 rounded-xl p-2xl border-l-4 border-primary shadow-sm space-y-3xl relative">
+<!-- Role Type (Filter Chips) -->
+<section>
+<label class="font-label-lg text-label-lg text-primary block mb-lg">Role Type</label>
+<div class="flex flex-wrap gap-sm">
+<button class="h-8 px-lg rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">check</span>
+                            Full-time
+                        </button>
+<button class="h-8 px-lg rounded-full border border-outline text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors">Contract</button>
+<button class="h-8 px-lg rounded-full border border-outline text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors">Freelance</button>
+<button class="h-8 px-lg rounded-full border border-outline text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors">Internship</button>
+</div>
+</section>
+<!-- Seniority (Outlined Chips) -->
+<section>
+<label class="font-label-lg text-label-lg text-primary block mb-lg">Seniority Level</label>
+<div class="flex flex-wrap gap-sm">
+<button class="h-8 px-lg rounded-full border border-outline text-on-surface-variant font-label-md text-label-md">Entry Level</button>
+<button class="h-8 px-lg rounded-full border-2 border-primary text-primary font-label-md text-label-md bg-primary-container/10">Junior</button>
+<button class="h-8 px-lg rounded-full border-2 border-primary text-primary font-label-md text-label-md bg-primary-container/10">Mid-Level</button>
+<button class="h-8 px-lg rounded-full border border-outline text-on-surface-variant font-label-md text-label-md">Senior</button>
+<button class="h-8 px-lg rounded-full border border-outline text-on-surface-variant font-label-md text-label-md">Director+</button>
+</div>
+</section>
+<!-- Work Style (Radio Chips) -->
+<section>
+<label class="font-label-lg text-label-lg text-primary block mb-lg">Work Style</label>
+<div class="flex gap-sm">
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="workstyle" type="radio"/>
+<div class="h-10 px-xl rounded-xl border border-outline peer-checked:border-primary peer-checked:bg-primary-container/20 peer-checked:text-primary flex items-center gap-md transition-all">
+<span class="material-symbols-outlined text-[20px]">home_work</span>
+<span class="font-label-lg text-label-lg">Remote</span>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="workstyle" type="radio"/>
+<div class="h-10 px-xl rounded-xl border border-outline peer-checked:border-primary peer-checked:bg-primary-container/20 peer-checked:text-primary flex items-center gap-md transition-all">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+<span class="font-label-lg text-label-lg">On-site</span>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="workstyle" type="radio"/>
+<div class="h-10 px-xl rounded-xl border border-outline peer-checked:border-primary peer-checked:bg-primary-container/20 peer-checked:text-primary flex items-center gap-md transition-all">
+<span class="material-symbols-outlined text-[20px]">shuffle</span>
+<span class="font-label-lg text-label-lg">Hybrid</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Location (Text Field) -->
+<section>
+<label class="font-label-lg text-label-lg text-primary block mb-sm">Preferred Location</label>
+<div class="relative group max-w-md">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none text-outline group-focus-within:text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<input class="w-full bg-surface-container-low border-b-2 border-outline focus:border-primary focus:ring-0 rounded-t-lg pt-6 pb-2 pl-xl font-body-lg text-body-lg transition-all outline-none" placeholder="e.g. San Francisco, London, or Remote" type="text" value="San Francisco, CA"/>
+<div class="absolute top-1 left-xl text-label-sm text-outline group-focus-within:text-primary">Location</div>
+</div>
+</section>
+<!-- Growth Priorities (Ranked Chips with handles) -->
+<section>
+<label class="font-label-lg text-label-lg text-primary block mb-lg">Growth Priorities (Drag to Rank)</label>
+<div class="space-y-sm max-w-lg">
+<div class="flex items-center justify-between p-lg bg-surface rounded-lg border border-outline-variant shadow-sm cursor-move hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+<span class="font-body-md text-body-md">1. Career Advancement</span>
+</div>
+<span class="px-sm py-xs bg-success-container text-tertiary rounded font-label-sm text-label-sm">High Priority</span>
+</div>
+<div class="flex items-center justify-between p-lg bg-surface rounded-lg border border-outline-variant shadow-sm cursor-move hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+<span class="font-body-md text-body-md">2. Skill Development</span>
+</div>
+<span class="px-sm py-xs bg-surface-container-highest text-on-surface-variant rounded font-label-sm text-label-sm">Secondary</span>
+</div>
+<div class="flex items-center justify-between p-lg bg-surface rounded-lg border border-outline-variant shadow-sm cursor-move hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+<span class="font-body-md text-body-md">3. Work-Life Balance</span>
+</div>
+<span class="px-sm py-xs bg-surface-container-highest text-on-surface-variant rounded font-label-sm text-label-sm">Secondary</span>
+</div>
+<div class="flex items-center justify-between p-lg bg-surface rounded-lg border border-outline-variant shadow-sm cursor-move hover:bg-surface-container-low transition-colors group opacity-60">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-outline">drag_indicator</span>
+<span class="font-body-md text-body-md">4. Equity &amp; Benefits</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Action -->
+<div class="flex justify-end pt-xl border-t border-outline-variant/30">
+<button class="px-3xl h-12 bg-primary text-on-primary font-label-lg text-label-lg rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-md">
+<span class="material-symbols-outlined">save</span>
+                        Save Preferences
+                    </button>
+</div>
+</div>
+<!-- Contextual Insight (Bento-style accessory) -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-xl">
+<div class="bg-high-confidence-container p-xl rounded-xl flex items-start gap-xl border-l-4 border-high-confidence">
+<div class="p-md bg-white rounded-full text-high-confidence">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-xs">AI Match Setting</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Your current preferences result in a <strong class="text-high-confidence">94% alignment</strong> with the local tech market in San Francisco.</p>
+</div>
+</div>
+<div class="bg-secondary-container/20 p-xl rounded-xl overflow-hidden relative group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-110 transition-transform duration-700" data-alt="A sophisticated digital visualization of a career path map with interconnected nodes and glowing data points. The aesthetic is modern and professional, using a corporate color palette of soft indigos and deep blues. Soft, ethereal lighting illuminates the network of nodes against a clean, light-mode background, evoking a sense of clarity, intelligence, and future-forward planning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGpzY4DvZzxSzLwKga0YqU_VLgXySk4_Il5-eq_3XURhOrq-rm2LcrFEk8Vgz-bHOzSGnMD1JKDeWwulcxQxMPPRcRDSm-Q3Slcp-UkZ7zFZYFO3RctXV9pd_xBH4dYGUnvojEhUx-lwx_ArWbaG5_qhD_aKzh9_PyUeMvSOVG_sXxQV8TREwEgS44BHBvlbl5rOrQXYjMrGUVbVb_fbjPxIqzuFkZpRq5zZvQPcQ3OuxW-uEih-61zlDYPD9fD8RBVKyvnZ0mvNZZ"/>
+<div class="relative z-10">
+<h4 class="font-title-md text-title-md text-secondary mb-xs">Career Path Preview</h4>
+<p class="font-body-md text-body-md text-on-secondary-container">See how these changes impact your long-term growth trajectory.</p>
+<button class="mt-md text-primary font-label-lg text-label-lg flex items-center gap-xs">
+                            View Forecast <span class="material-symbols-outlined text-[18px]">trending_up</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive Layer: Ripple Effect Logic -->
+<script>
+        document.querySelectorAll('button, a').forEach(elem => {
+            elem.addEventListener('mousedown', function(e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = e.clientX - rect.left - size/2 + 'px';
+                ripple.style.top = e.clientY - rect.top - size/2 + 'px';
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+<style>
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</body></html>

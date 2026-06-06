@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: 'Roboto Flex', 'Roboto', system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: 'Source Sans 3', system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,75 +46,93 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Material You tokens */
+  --color-on-surface: var(--m3-on-surface);
+  --color-on-surface-variant: var(--m3-on-surface-variant);
+  --color-surface-variant: var(--m3-surface-variant);
+  --color-surface-container: var(--m3-surface-container);
+  --color-surface-container-low: var(--m3-surface-container-low);
+  --color-surface-container-high: var(--m3-surface-container-high);
+  --color-surface-container-lowest: var(--m3-surface-container-lowest);
+  --color-elevated-surface-1: var(--m3-elevated-surface-1);
+  --color-elevated-surface-2: var(--m3-elevated-surface-2);
+  --color-outline: var(--m3-outline);
+  --color-outline-variant: var(--m3-outline-variant);
+  --color-primary-container: var(--m3-primary-container);
+  --color-on-primary-container: var(--m3-on-primary-container);
+  --color-primary-fixed: var(--m3-primary-fixed);
+  --color-secondary-container: var(--m3-secondary-container);
+  --color-on-secondary-container: var(--m3-on-secondary-container);
+  --color-tertiary: var(--m3-tertiary);
+  --color-high-confidence: var(--m3-high-confidence);
+  --color-high-confidence-container: var(--m3-high-confidence-container);
+  --color-medium-confidence: var(--m3-medium-confidence);
+  --color-medium-confidence-container: var(--m3-medium-confidence-container);
+  --color-low-confidence: var(--m3-low-confidence);
+  --color-low-confidence-container: var(--m3-low-confidence-container);
+  --color-success-container: var(--m3-success-container);
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  --background: #fcf8fb;
+  --foreground: #1c1b1d;
+  --card: #F7F2FA;
+  --card-foreground: #1c1b1d;
+  --popover: #F3EDF7;
+  --popover-foreground: #1c1b1d;
+  --primary: #183ce6;
+  --primary-foreground: #ffffff;
+  --secondary: #e5e1e4;
+  --secondary-foreground: #1c1b1d;
+  --muted: #f0edf0;
+  --muted-foreground: #444656;
+  --accent: #e5e1e4;
+  --accent-foreground: #1c1b1d;
+  --destructive: #C62828;
+  --border: #CAC4D0;
+  --input: #e5e1e4;
+  --ring: #183ce6;
+  --chart-1: #183ce6;
+  --chart-2: #2E7D32;
+  --chart-3: #E65100;
+  --chart-4: #C62828;
+  --chart-5: #006157;
+  --radius: 0.75rem;
+  --sidebar: #F3EDF7;
+  --sidebar-foreground: #1c1b1d;
+  --sidebar-primary: #183ce6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e5e1e4;
+  --sidebar-accent-foreground: #1c1b1d;
+  --sidebar-border: #CAC4D0;
+  --sidebar-ring: #183ce6;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* M3 raw values */
+  --m3-on-surface: #1c1b1d;
+  --m3-on-surface-variant: #444656;
+  --m3-surface-variant: #e5e1e4;
+  --m3-surface-container: #f0edf0;
+  --m3-surface-container-low: #f6f2f5;
+  --m3-surface-container-high: #ebe7ea;
+  --m3-surface-container-lowest: #ffffff;
+  --m3-elevated-surface-1: #F7F2FA;
+  --m3-elevated-surface-2: #F3EDF7;
+  --m3-outline: #79747E;
+  --m3-outline-variant: #CAC4D0;
+  --m3-primary-container: #3d5afe;
+  --m3-on-primary-container: #f1f0ff;
+  --m3-primary-fixed: #dee0ff;
+  --m3-secondary-container: #96a5ff;
+  --m3-on-secondary-container: #27378a;
+  --m3-tertiary: #006157;
+  --m3-high-confidence: #2E7D32;
+  --m3-high-confidence-container: #E8F5E9;
+  --m3-medium-confidence: #E65100;
+  --m3-medium-confidence-container: #FFF3E0;
+  --m3-low-confidence: #C62828;
+  --m3-low-confidence-container: #FFEBEE;
+  --m3-success-container: #D4F0EC;
 }
 
 @layer base {
@@ -122,9 +140,13 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-on-surface;
+    font-family: 'Roboto Flex', 'Roboto', system-ui, sans-serif;
   }
-  html {
-    @apply font-sans;
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
   }
 }
